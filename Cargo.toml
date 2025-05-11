@@ -1,0 +1,42 @@
+[package]
+name = "firechain_wallet"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8"
+secp256k1 = { version = "0.24", features = ["rand"] }
+sha2 = "0.10"
+ripemd = "0.1"
+digest = "0.10"
+zeroize = "1.5"
+hex = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+clap = { version = "4", features = ["derive"] }
+bs58 = "0.4"
+base64 = "0.21"
+bip39 = "=1.1.0"
+argon2 = "0.5"
+password-hash = "0.5"
+aes-gcm = { version = "0.10", features = ["aes", "alloc"] }
+hmac = "0.12"
+pbkdf2 = "0.12"
+sha1 = "0.10"
+assert_cmd = "2"
+predicates = "3"
+tempfile = "3"
+chrono = "0.4"
+atty = "0.2"
+
+# NOVAS DEPENDÊNCIAS
+dialoguer        = "0.10"
+colored          = "2.0"
+prettytable-rs   = "0.10"
+log              = "0.4"
+env_logger       = "0.10"
+zxcvbn           = { version = "0.3", optional = true }
+
+# Features opcionais
+[features]
+password_strength = ["zxcvbn"]

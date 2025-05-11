@@ -1,0 +1,32 @@
+name: 🐞 Bug Report
+description: Reportar um bug na FireChain Wallet CLI
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o comportamento atual e esperado
+      placeholder: "Ao rodar 'firechain-cli import' obtive erro X..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Execute o comando X
+        2. Use a carteira Y
+        3. Veja o erro Z
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Versão da CLI
+      placeholder: "v0.1.0"
+    validations:
+      required: true
