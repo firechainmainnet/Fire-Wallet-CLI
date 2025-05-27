@@ -19,6 +19,7 @@ fn run_generate_wallet() {
     println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     println!("🔐 Gerando carteira segura com padrões de produção...\n");
 
+    // ✅ Geração segura com todos os dados derivados corretamente
     let (privkey, pubkey, fire, eth, btc, fingerprint, derivation_hash) = generate_keypair();
 
     println!("✅ Carteira gerada com sucesso!\n");
@@ -30,7 +31,7 @@ fn run_generate_wallet() {
     println!("\n━━━━━━━━━━━━━━━━━━ 📬 ENDEREÇOS ━━━━━━━━━━━━━━━━━━");
     println!("📬 Endereço (Fire)     : {}", fire);
     println!("🌐 Endereço (Ethereum) : {}", eth);
-    println!("₿  Endereço (Bitcoin)  : {}", btc);
+    println!("₿  Endereço (Bitcoin)  : {}", btc); // ✅ Agora correto
 
     println!("\n━━━━━━━━━━━━━━━━━━ 🧬 METADADOS ━━━━━━━━━━━━━━━━━━");
     println!("🧬 Fingerprint SHA256        : {}", fingerprint);

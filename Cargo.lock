@@ -331,6 +331,7 @@ dependencies = [
  "once_cell",
  "predicates",
  "rand",
+ "regex",
  "ripemd",
  "secp256k1",
  "sha2",

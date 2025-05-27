@@ -1,12 +1,17 @@
 //! 🧪 Teste direto da geração de carteira (generate_keypair)
-//! 🔒 Valida todos os formatos e metadados criptográficos
-//! 🎯 Foco em segurança, entropia e formatação
 
 use firechain_cli::wallet::generate_keypair;
-use predicates::prelude::*;
-use regex::Regex;
+use firechain_cli::utils::address::{
+    public_key_to_fire_address,
+    public_key_to_eth_address,
+    public_key_to_btc_address,
+};
 
-/// ✅ Testa se a função de geração retorna chaves válidas e endereços formatados corretamente
+use secp256k1::Secp256k1;
+use sha2::{Sha256, Digest};
+use rand::rngs::OsRng; // ✅ necessário para compilar
+use hex;
+
 #[test]
 fn test_generate_keypair_all_formats_valid() {
     let (priv_key, pub_key, fire_addr, eth_addr, btc_addr, fingerprint, hash) = generate_keypair();
@@ -22,26 +27,24 @@ fn test_generate_keypair_all_formats_valid() {
     println!("🧪 Hash de Derivação Keccak : {hash}");
     println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-    // 🔐 Chave privada: hex com 64 caracteres
+    // Validação da private key (64 caracteres hex)
     assert!(priv_key.len() == 64 && priv_key.chars().all(|c| c.is_ascii_hexdigit()));
 
-    // 🔓 Chave pública: começa com 04, tem 130 caracteres
+    // Validação da public key (130 caracteres uncompressed)
     assert!(pub_key.len() == 130 && pub_key.starts_with("04"));
 
-    // 📬 Endereço FireChain: prefixo + base58
+    // FireChain: prefixo + base58
     assert!(fire_addr.starts_with("f1r3:") && fire_addr.len() > 20);
 
-    // 🌐 Ethereum: prefixo 0x e 40 hex chars
+    // Ethereum: 0x + 40 hex
     assert!(eth_addr.starts_with("0x") && eth_addr.len() == 42);
 
-    // ₿ Bitcoin: começa com 1, mínimo 26, máximo 35
+    // Bitcoin: começa com 1 e entre 26 e 35 chars
     assert!(btc_addr.starts_with('1') && (26..=35).contains(&btc_addr.len()));
 
-    // 🧬 Fingerprint SHA256: 64 caracteres hex
+    // SHA256 fingerprint: 64 hex
     assert!(fingerprint.len() == 64 && fingerprint.chars().all(|c| c.is_ascii_hexdigit()));
 
-    // 🧪 Hash de derivação (Keccak): 64 caracteres hex
+    // Keccak hash: 64 hex
     assert!(hash.len() == 64 && hash.chars().all(|c| c.is_ascii_hexdigit()));
-
-    println!("✅ Todos os critérios de validação foram atendidos.");
 }

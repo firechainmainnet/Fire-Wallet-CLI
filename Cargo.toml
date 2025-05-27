@@ -12,7 +12,7 @@ categories = ["cryptography", "command-line-utilities"]
 default-run = "firechain-cli"
 
 # ────────────────────────────────────────────────────────────────
-# 🔐 DEPENDÊNCIAS DE PRODUÇÃO
+# 🔐 DEPENDÊNCIAS DE PRODUÇÃO — Core funcional da CLI
 # ────────────────────────────────────────────────────────────────
 [dependencies]
 
@@ -30,29 +30,34 @@ tiny-keccak = { version = "2.0", features = ["keccak"] }
 # ▶️ Cache interno e inicializações únicas
 once_cell = "1.19"
 
-# ▶️ CLI profissional com UX premium
+# ▶️ CLI robusta com UX premium
 clap = { version = "4.5", features = ["derive"] }
 
 # ────────────────────────────────────────────────────────────────
-# 🧪 DEPENDÊNCIAS DE TESTES (Integração, cobertura e UX CLI)
+# 🧪 DEPENDÊNCIAS DE TESTES — Garantia de qualidade e confiabilidade
 # ────────────────────────────────────────────────────────────────
 [dev-dependencies]
 
 # ▶️ Execução e validação de binários CLI
 assert_cmd = "2.0"
+
+# ▶️ Testes com condições lógicas declarativas
 predicates = "3.1"
 
-# ▶️ Comparações de ponto flutuante (opcional futuro financeiro)
+# ▶️ Comparações de ponto flutuante (precisão financeira futura)
 float-cmp = "0.10"
 
-# ▶️ Saída de terminal com cor e destaque
+# ▶️ Saída de terminal com cor e destaque visual
 termcolor = "1.4"
 
-# ▶️ Cobertura de código com relatórios HTML e CLI
+# ▶️ Cobertura de código com suporte a relatórios HTML
 cargo-llvm-cov = "0.6"
 
+# ▶️ Expressões regulares para validação de saída textual
+regex = "1"
+
 # ────────────────────────────────────────────────────────────────
-# ▶️ Configuração do binário principal
+# ▶️ Binário principal da aplicação CLI
 # ────────────────────────────────────────────────────────────────
 [[bin]]
 name = "firechain-cli"
