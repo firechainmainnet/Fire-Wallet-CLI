@@ -1,1 +1,3 @@
-pub mod fs;
+//! 🧰 Módulo central de utilitários
+
+pub mod address;

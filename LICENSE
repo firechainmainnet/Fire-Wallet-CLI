@@ -1,6 +1,8 @@
-MIT License
+FireChain CLI — Motor Criptográfico CLI-first
+(C) 2023–2025 Guilherme Lima | FireChain™ Project
+https://github.com/firechainmainnet/fire-wallet-cli
 
-Copyright (c) 2025 Guilherme Lima
+MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +21,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--- FIRECHAIN ADDENDUM ---
+
+A FireChain CLI é licenciada sob MIT para fins de pesquisa, aprendizado pessoal e projetos não comerciais.
+
+Qualquer uso que envolva:
+
+• Ambientes de produção, prestação de serviços ou SaaS  
+• Integrações com sistemas empresariais, bancários ou comerciais  
+• Comercialização de forks, binários ou soluções derivadas  
+• Uso da marca FireChain (nome, logos, identidade visual)  
+
+requer contrato formal com a equipe FireChain.
+
+A violação destas condições pode configurar infração de direitos autorais e violação de marca registrada, sujeita a penalidades conforme legislação vigente.
+
+📄 Solicite contrato ou licenciamento comercial via: https://www.linkedin.com/in/guilhermelimadev-web3/

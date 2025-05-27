@@ -1,42 +1,59 @@
 [package]
-name = "firechain_wallet"
-version = "0.1.0"
+name = "firechain-cli"
+version = "0.1.1"
 edition = "2021"
+authors = ["Guilherme Lima"]
+description = "🔥 FireChain CLI - Carteira Web3 com foco em segurança, modularidade e experiência premium."
+license = "MIT"
+repository = "https://github.com/firechainmainnet/fire-wallet-cli"
+readme = "README.md"
+keywords = ["blockchain", "wallet", "cli", "firechain", "web3"]
+categories = ["cryptography", "command-line-utilities"]
+default-run = "firechain-cli"
 
+# ────────────────────────────────────────────────────────────────
+# 🔐 DEPENDÊNCIAS DE PRODUÇÃO
+# ────────────────────────────────────────────────────────────────
 [dependencies]
-rand = "0.8"
+
+# ▶️ Geração de chaves e assinaturas
 secp256k1 = { version = "0.24", features = ["rand"] }
+rand = "0.8"
+hex = "0.4"
+bs58 = "0.5"
+
+# ▶️ Hashing para endereços e fingerprint
 sha2 = "0.10"
 ripemd = "0.1"
-digest = "0.10"
-zeroize = "1.5"
-hex = "0.4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-clap = { version = "4", features = ["derive"] }
-bs58 = "0.4"
-base64 = "0.21"
-bip39 = "=1.1.0"
-argon2 = "0.5"
-password-hash = "0.5"
-aes-gcm = { version = "0.10", features = ["aes", "alloc"] }
-hmac = "0.12"
-pbkdf2 = "0.12"
-sha1 = "0.10"
-assert_cmd = "2"
-predicates = "3"
-tempfile = "3"
-chrono = "0.4"
-atty = "0.2"
+tiny-keccak = { version = "2.0", features = ["keccak"] }
 
-# NOVAS DEPENDÊNCIAS
-dialoguer        = "0.10"
-colored          = "2.0"
-prettytable-rs   = "0.10"
-log              = "0.4"
-env_logger       = "0.10"
-zxcvbn           = { version = "0.3", optional = true }
+# ▶️ Cache interno e inicializações únicas
+once_cell = "1.19"
 
-# Features opcionais
-[features]
-password_strength = ["zxcvbn"]
+# ▶️ CLI profissional com UX premium
+clap = { version = "4.5", features = ["derive"] }
+
+# ────────────────────────────────────────────────────────────────
+# 🧪 DEPENDÊNCIAS DE TESTES (Integração, cobertura e UX CLI)
+# ────────────────────────────────────────────────────────────────
+[dev-dependencies]
+
+# ▶️ Execução e validação de binários CLI
+assert_cmd = "2.0"
+predicates = "3.1"
+
+# ▶️ Comparações de ponto flutuante (opcional futuro financeiro)
+float-cmp = "0.10"
+
+# ▶️ Saída de terminal com cor e destaque
+termcolor = "1.4"
+
+# ▶️ Cobertura de código com relatórios HTML e CLI
+cargo-llvm-cov = "0.6"
+
+# ────────────────────────────────────────────────────────────────
+# ▶️ Configuração do binário principal
+# ────────────────────────────────────────────────────────────────
+[[bin]]
+name = "firechain-cli"
+path = "src/bin/main.rs"
