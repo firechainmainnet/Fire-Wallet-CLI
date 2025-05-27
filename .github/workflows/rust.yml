@@ -1,0 +1,33 @@
+name: 🔧 FireChain CLI — Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🔄 Checkout repositório
+      uses: actions/checkout@v3
+
+    - name: ⚙️ Instalar toolchain Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: 📦 Build do projeto
+      run: cargo build --release
+
+    - name: 🧪 Testes unitários
+      run: cargo test --all --release -- --nocapture
+
+    - name: 📊 Relatório de cobertura (LLVM)
+      run: |
+        cargo install cargo-llvm-cov --locked
+        cargo llvm-cov --fail-under-lines 85
