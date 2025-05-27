@@ -9,12 +9,31 @@ use tiny_keccak::{Hasher, Keccak};
 use bs58;
 use hex;
 
-/// 🔥 FireChain: sha256 → ripemd160 → base58 → "f1r3:..."
+/// 🔥 FireChain Address (nova versão):
+/// SHA256 → RIPEMD160 → prefixo 0x77 → checksum → base58check → prefixo visual `f1r3`
+/// Resultado: f1r3<base58check>
 pub fn public_key_to_fire_address(pubkey: &SecpPublicKey) -> String {
     let pubkey_bytes = pubkey.serialize_uncompressed();
-    let sha256 = Sha256::digest(&pubkey_bytes[1..]);
-    let ripemd = Ripemd160::digest(&sha256);
-    format!("f1r3:{}", bs58::encode(ripemd).into_string())
+
+    // 🔐 1. SHA256 da public key
+    let sha256 = Sha256::digest(&pubkey_bytes);
+
+    // 🔐 2. RIPEMD160 do SHA256
+    let ripemd160 = Ripemd160::digest(sha256);
+
+    // 🔥 3. Prefixo FireChain: 0x77
+    let mut payload = vec![0x77];
+    payload.extend_from_slice(&ripemd160);
+
+    // 🔍 4. Checksum = SHA256(SHA256(payload))
+    let checksum = Sha256::digest(&Sha256::digest(&payload));
+    payload.extend_from_slice(&checksum[..4]); // 4 bytes
+
+    // 🧬 5. Base58Check encoding
+    let encoded = bs58::encode(payload).into_string();
+
+    // ✅ 6. Prefixo visual `f1r3` (fora do base58check)
+    format!("f1r3{}", encoded)
 }
 
 /// 🌐 Ethereum: keccak256(pubkey)[12..] → hex

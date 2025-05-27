@@ -1,6 +1,6 @@
 [package]
 name = "firechain-cli"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Guilherme Lima"]
 description = "🔥 FireChain CLI - Carteira Web3 com foco em segurança, modularidade e experiência premium."

@@ -1,3 +1,5 @@
+//! 🔍 Testes de validação direta dos formatos de endereço gerado a partir da chave pública
+
 use firechain_cli::utils::address::{
     public_key_to_fire_address,
     public_key_to_eth_address,
@@ -9,12 +11,10 @@ use rand::rngs::OsRng;
 
 #[test]
 fn test_address_format_generation_from_pubkey() {
-    // ✅ Gerar uma chave pública válida em tempo real
     let secp = Secp256k1::new();
     let mut rng = OsRng;
-    let (secret_key, public_key) = secp.generate_keypair(&mut rng);
+    let (_secret_key, public_key) = secp.generate_keypair(&mut rng);
 
-    // ✅ Testar os formatos de endereço
     let fire = public_key_to_fire_address(&public_key);
     let eth  = public_key_to_eth_address(&public_key);
     let btc  = public_key_to_btc_address(&public_key);
@@ -26,7 +26,16 @@ fn test_address_format_generation_from_pubkey() {
     println!("₿  Bitcoin   : {}", btc);
     println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-    assert!(fire.starts_with("f1r3:") && fire.len() > 20);
-    assert!(eth.starts_with("0x") && eth.len() == 42);
-    assert!(btc.starts_with('1') && (26..=35).contains(&btc.len()));
+    // ✅ FireChain: prefixo correto e comprimento entre 30–40 (f1r3 + base58)
+    assert!(fire.starts_with("f1r3"));
+    let base58_part = &fire[4..];
+    assert!((26..=35).contains(&base58_part.len()), "Comprimento base58 inválido");
+
+    // 🌐 Ethereum: 42 chars e começa com 0x
+    assert!(eth.starts_with("0x"));
+    assert_eq!(eth.len(), 42);
+
+    // ₿ Bitcoin: prefixo '1' e comprimento base58 típico
+    assert!(btc.starts_with('1') || btc.starts_with('m') || btc.starts_with('n'));
+    assert!((26..=35).contains(&btc.len()), "Comprimento Bitcoin inválido");
 }

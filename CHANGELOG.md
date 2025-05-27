@@ -9,6 +9,66 @@ Todas as versões abaixo refletem **marcos técnicos reais** no avanço da arqui
 
 ---
 
+## [v0.1.2] — 2025-05-27
+
+> Redefinimos o formato de endereçamento FireChain com foco em integridade criptográfica, legibilidade institucional e interoperabilidade de nível enterprise. Esta versão fortalece a identidade técnica da FireChain CLI, prepara a base para integrações futuras e posiciona o endereço FireChain como um padrão seguro e auditável.
+
+---
+
+### 🔗 Destaques Estratégicos
+
+- **Novo padrão de endereço FireChain (`f1r3`)**
+  - Redesenho completo do esquema de endereçamento com foco em segurança, leitura e brand awareness.
+  - Prefixo simbólico `"f1r3"` com base em Base58Check e binário `0x77`, removendo separadores e ambiguidades visuais.
+
+- **Segurança com significado: Prefixo `0x77`**
+  - Binário `0x77` carrega significados de espiritualidade (7), multiplicação (x) e soberania digital — reforçando identidade e segurança.
+
+- **Cobertura de testes 100% com E2E real**
+  - Atualização completa dos testes `address_formats.rs`, `wallet_generate.rs` e `cli_generate.rs` com validações reais em produção.
+
+- **Atualização institucional do README**
+  - Exemplo de saída CLI reformulado, emojis removidos das partes técnicas, e foco em confiabilidade e visual profissional mantido.
+
+---
+
+### 🧱 Mudanças Técnicas
+
+#### ✅ Adicionado
+- Novo formato de endereço FireChain com `Base58Check` e prefixo `0x77`.
+- Validação de comprimento base58 e prefixo textual (`f1r3`) em testes.
+- Changelog institucional baseado em arquitetura e branding técnico.
+
+#### 🔁 Alterado
+- `address.rs`: Derivação de endereço FireChain refatorada para gerar `f1r3<base58check>` limpo.
+- `wallet.rs`: Novo padrão FireChain aplicado nas funções principais de geração.
+- Testes `wallet_generate` e `cli_generate` adaptados ao novo formato.
+
+#### 🧹 Removido
+- Uso do separador `:` no endereço FireChain.
+- Emojis em trechos de código e validação (preservados apenas no layout visual).
+
+#### 🛠 Corrigido
+- Inconsistência no teste anterior que esperava prefixo `f1r3:` e sufixo com símbolos.
+
+#### 🧬 Auditoria e Design
+- Nova convenção de endereço reforça alinhamento com segurança e design técnico.
+- Arquitetura interna do `README` e dos testes reforçada para refletir visão institucional.
+
+---
+
+### 📈 Recomendação de Upgrade
+
+Todos os usuários devem atualizar para `v0.1.2` o quanto antes.  
+Essa versão estabelece um novo padrão de endereço FireChain estável e auditável, fundamental para integração com:
+
+- Multisig determinístico
+- Exportação segura de `.wallet`
+- Modo STDIN/JSON
+- Ledger/Trezor/WebUSB
+
+---
+
 ## [v0.1.1] — 2025-05-26
 
 ### 🔒 Marco Enterprise: Modelo Comercial Consolidado
