@@ -9,7 +9,7 @@ use clap::{Parser, Subcommand, Args};
 #[derive(Parser)]
 #[command(name = "firechain-cli")]
 #[command(author = "Guilherme Lima")]
-#[command(version = "0.1.2")]
+#[command(version = "0.1.3")]
 #[command(
     about = "🔥 FireChain CLI — Carteira Web3 com foco em segurança e modularidade.",
     long_about = r#"
