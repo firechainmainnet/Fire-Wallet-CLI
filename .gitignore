@@ -1,2 +1,3 @@
 # Ignorar pasta de build do Cargo (Rust)
 /target/
+.git

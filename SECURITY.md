@@ -1,89 +1,108 @@
-# 🔐 Política de Segurança — FireChain CLI
+# 🔐 Política Oficial de Segurança – FireChain CLI
 
-A segurança da FireChain CLI é parte central do nosso compromisso com a soberania digital. Este documento define as diretrizes para reporte de vulnerabilidades, escopo de análise, políticas de resposta e nosso programa oficial de **Bug Bounty baseado em tokens nativos FireChain**.
+A segurança é um pilar inegociável da FireChain CLI.  
+Nosso compromisso vai além de boas práticas: entregamos **criptografia real, execução auditável e controle local soberano**, em conformidade com os padrões mais exigentes de segurança da informação e soberania digital Web3.
 
----
-
-## 📬 Como reportar uma vulnerabilidade
-
-Se você encontrou um possível problema de segurança envolvendo:
-
-- Derivação de chaves
-- Exportação de carteiras
-- Fingerprints, verificações ou criptografia
-- Argumentos perigosos (`--unsafe-*`)
-- Ações que comprometem privacidade, sigilo ou integridade do binário
-
-Por favor, **NÃO publique em issues públicas ou redes sociais.**  
-Entre em contato diretamente via:
-
-🔗 [LinkedIn (mensagem direta)](https://www.linkedin.com/in/guilhermelimadev-web3/)  
-🛡️ GitHub: crie uma issue privada com a tag `security` se necessário
+Este documento define nossa **política de resposta a vulnerabilidades**, escopo técnico de análise, conduta ética esperada de pesquisadores e detalhes do nosso **programa de Bug Bounty oficial com tokens FIRE**.
 
 ---
 
-## 🎯 Escopo de interesse
+## 📬 Reporte Seguro de Vulnerabilidades
 
-Análises bem-vindas incluem (mas não se limitam a):
+Encontrou uma possível falha de segurança?  
+**Nunca compartilhe detalhes publicamente.** Utilize um dos canais abaixo:
 
-- Falhas em derivação ECDSA, seed ou mnemonics
-- Vazamento de chaves privadas via CLI
-- Falhas na zeroização de memória
-- Criptografia insegura ou fraca (ex: AES, Argon2id, futuras integrações)
-- Bypass de proteções como `--unsafe-dump`
-- Desvios no modo STDIN / JSON (futuro)
+- 🔐 Mensagem direta no [LinkedIn (Guilherme Lima)](https://www.linkedin.com/in/guilhermelimadev-web3/)
+- 🛡️ Issue privada no GitHub com a tag `security`
 
----
-
-## 🚫 Fora de escopo
-
-- Bugs visuais ou UX sem impacto de segurança
-- Solicitações de features ainda não implementadas
-- Comportamentos esperados por design (ex: uso avançado com `--unsafe`)
-- Questões relacionadas a sistemas operacionais externos ou shells
+Não exigimos KYC para colaborador nem formulários extensos: você fala diretamente com o autor e responsável técnico.
 
 ---
 
-## ⏱️ SLA de Resposta
+## 🧠 Escopo Técnico de Interesse
 
-- A FireChain CLI responde vulnerabilidades reportadas **em até 72h úteis**.
-- Casos críticos podem receber **patch privado antes do anúncio público**.
-- Atualizações serão documentadas no `CHANGELOG.md` com agradecimentos (caso autorizado).
+Aceitamos análises responsáveis e reprodutíveis que envolvam:
 
----
-
-## 🏆 Bug Bounty (Recompensa de Vulnerabilidade)
-
-A FireChain CLI possui um **programa oficial de Bug Bounty com recompensas reais**, sempre pagas em nosso **token nativo FireChain (FIRE)**.
-
-- Todos os valores são transferidos on-chain com transparência
-- Você pode **reter, trocar (swap) ou transferir** os tokens conforme preferir
-- Isso é Web3 de verdade: **auto-custódia sem burocracia, sem KYC, sem limitações**
-
-🏅 Recompensas são baseadas em severidade (valores aproximados):
-
-| Nível         | Descrição Técnica                        | Recompensa Estimada (FIRE)     |
-|---------------|------------------------------------------|---------------------------------|
-| ⚠️ Baixa      | Falhas teóricas ou não exploráveis       | 25–50 FIRE                      |
-| 🚨 Média      | Vazamentos indiretos, inconsistência CLI  | 100–250 FIRE                    |
-| 🔥 Crítica    | Acesso a chaves, bypass real ou exploit   | 500+ FIRE + nome no release     |
+- Comprometimento na geração ECDSA-secp256k1
+- Vazamento de chaves privadas (direto ou via derivação)
+- Bypass de zeroização de memória (`zeroize`)
+- Fragilidades em hashing (SHA256, Keccak, RIPEMD160)
+- Criptografia insegura na exportação `.wallet` (AES-256-GCM, Argon2id)
+- Falhas em validação de argumentos CLI (`--unsafe-*`)
+- Injeções via STDIN ou manipulação do modo `--json` (planejado)
 
 ---
 
-## 🤝 Ética & Conduta do Pesquisador
+## 🚫 Fora de Escopo
 
-Para receber recompensa e ser reconhecido publicamente, você deve:
-
-- **Não divulgar publicamente antes de correção oficial**
-- **Evitar exploração ativa ou uso indevido das falhas descobertas**
-- Relatar de forma ética, clara e com reprodutibilidade
+- Bugs de UI/UX ou sugestões de CLI
+- Relatórios genéricos com ferramentas automatizadas sem PoC
+- Ações esperadas por design quando `--unsafe-*` for usado
+- Vulnerabilidades dependentes de sistemas externos (SO, shell, hardware)
 
 ---
 
-## 🔐 Um novo padrão em segurança local
+## ⏱️ Política de Resposta
 
-A FireChain CLI é o primeiro projeto Web3 que **traz segurança real com auto-custódia local desde o primeiro byte**.  
-Nem Bitcoin Core, Metamask ou Ledger oferecem esse nível de controle direto com acesso auditável.
+Nos comprometemos com os seguintes prazos:
 
-> Se você acredita que encontrou uma falha — colabore.  
-> Aqui, recompensamos quem fortalece o que importa.
+| Tipo de Relato     | Tempo de Resposta | Patch/Correção         |
+|--------------------|-------------------|-------------------------|
+| Crítica (exploit)  | 24h úteis         | Correção imediata       |
+| Média              | 48–72h úteis      | Correção prioritária    |
+| Baixa              | Até 5 dias úteis  | Correção em release     |
+
+Todos os casos terão acompanhamento pessoal do autor, com confidencialidade garantida.  
+Quando autorizado, nomes dos contribuidores serão publicados no `CHANGELOG.md`.
+
+---
+
+## 🏆 Bug Bounty — Recompensas FIRE
+
+Recompensamos quem fortalece nossa stack.  
+As recompensas são pagas em nosso token nativo **FIRE** e transferidas on-chain:
+
+| Severidade | Exemplo Técnico                                      | Recompensa Estimada (FIRE) |
+|------------|-------------------------------------------------------|-----------------------------|
+| ⚠️ Baixa   | Hash fraco, argumentação insegura, observações      | 50–100 FIRE                |
+| 🚨 Média   | Vazamento de chave privada via uso comum            | 200–400 FIRE               |
+| 🔥 Crítica | Exploit funcional, desvio completo de segurança     | 500–1000+ FIRE + destaque  |
+
+Sem burocracia, sem bancos, sem barreiras.  
+Isso é Web3 como deveria ser.
+
+---
+
+## 🤝 Código de Ética do Pesquisador
+
+Para garantir recompensa e reconhecimento público:
+
+- ❌ Não divulgar publicamente antes da correção oficial
+- ✅ Manter conduta responsável e ética
+- ✅ Garantir reprodutibilidade mínima com descrição clara
+
+Pesquisadores que cooperam de forma construtiva são tratados como parceiros, não adversários.
+
+---
+
+## 📄 Compliance e Licença
+
+Este projeto é licenciado sob os termos da [Licença MIT (Português)](./LICENSE).
+
+Colaboradores que reportam vulnerabilidades e recebem recompensa aceitam os termos desta licença, inclusive a cláusula de **isenção de responsabilidade legal**.
+
+---
+
+## 💬 Última mensagem
+
+Você não precisa ser hacker para entender segurança.  
+Mas aqui, recompensamos quem pensa como um — para proteger os demais.
+
+> “Segurança é quando você sabe exatamente o que cada byte faz.”  
+> – FireChain™
+
+---
+
+**Guilherme Lima**  
+Arquiteto e responsável técnico  
+🔗 [LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)
