@@ -2,6 +2,30 @@
   <img src="assets/firechain_banner.png" alt="FireChain CLI" width="600px" />
 </p>
 
+---
+
+<p align="center">
+  <!-- 🔧 Tecnologia -->
+  <img src="https://img.shields.io/badge/Rust-2021-934c97" />
+  <img src="https://img.shields.io/badge/CLI-Clap%204.5-orange" />
+  <img src="https://img.shields.io/badge/Hashing-SHA2%20%7C%20Keccak%20%7C%20RIPEMD160-FF6D00" />
+
+  <!-- 🔐 Segurança & Execução -->
+  <img src="https://img.shields.io/badge/execução-100%25%20local-blue" />
+  <img src="https://img.shields.io/badge/memória-zeroizada-purple" />
+  <img src="https://img.shields.io/badge/fingerprint-unico%20por%20carteira-9C27B0" />
+  <img src="https://img.shields.io/badge/Testes-Reais%20via%20CLI-green" />
+  <img src="https://img.shields.io/badge/Cobertura-100%25-4CAF50" />
+
+  <!-- 📦 Repositório -->
+  <img src="https://img.shields.io/badge/License-MIT-9C27B0" />
+  <img src="https://img.shields.io/github/last-commit/firechainmainnet/fire-wallet-cli" />
+  <img src="https://img.shields.io/github/issues/firechainmainnet/fire-wallet-cli" />
+  <img src="https://img.shields.io/badge/version-0.1.2-blue" />
+</p>
+
+---
+
 # 🔥 FireChain CLI
 
 **🧱 Sua stack Web3 começa na linha de comando.**
@@ -24,33 +48,6 @@ CLI local, auditável e modular para gerenciamento seguro de carteiras Web3 — 
 - [📄 Documentação e Licenças](#-documentação-e-licenças)
 - [🤝 Contribuições](#-contribuições)
 - [🔚 Fechamento](#-fechamento)
-
----
-
-## 📊 Badges Técnicos
-
-<!-- 🔧 Tecnologia -->
-![Rust](https://img.shields.io/badge/Rust-2021-934c97)
-![Crates.io](https://img.shields.io/crates/v/firechain-cli)
-![Clap](https://img.shields.io/badge/CLI-Clap%204.5-orange)
-![Hashing](https://img.shields.io/badge/Hashing-SHA2%20%7C%20Keccak%20%7C%20RIPEMD160-FF6D00)
-
-<!-- ⚙️ Build & Qualidade -->
-![Build](https://img.shields.io/github/actions/workflow/status/firechainmainnet/fire-wallet-cli/rust.yml?label=build)
-![Coverage](https://img.shields.io/badge/Cobertura-100%25-4CAF50)
-![Docs](https://img.shields.io/badge/docs.rs-online-informational)
-![Semver](https://img.shields.io/badge/semver-stable-brightgreen)
-
-<!-- 🔐 Segurança & Execução -->
-![Execução Local](https://img.shields.io/badge/execução-100%25%20local-blue)
-![Zeroize](https://img.shields.io/badge/memória-zeroizada-purple)
-![Fingerprint](https://img.shields.io/badge/fingerprint-unico%20por%20carteira-9C27B0)
-
-<!-- 📦 Licença & Repositório -->
-![License](https://img.shields.io/badge/License-MIT-9C27B0)
-![Último Commit](https://img.shields.io/github/last-commit/firechainmainnet/fire-wallet-cli)
-![Issues](https://img.shields.io/github/issues/firechainmainnet/fire-wallet-cli)
-![Versão](https://img.shields.io/badge/version-0.1.2-blue)
 
 ---
 
