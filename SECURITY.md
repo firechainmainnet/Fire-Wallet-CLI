@@ -1,108 +1,133 @@
 # 🔐 Política Oficial de Segurança – FireChain CLI
 
-A segurança é um pilar inegociável da FireChain CLI.  
-Nosso compromisso vai além de boas práticas: entregamos **criptografia real, execução auditável e controle local soberano**, em conformidade com os padrões mais exigentes de segurança da informação e soberania digital Web3.
-
-Este documento define nossa **política de resposta a vulnerabilidades**, escopo técnico de análise, conduta ética esperada de pesquisadores e detalhes do nosso **programa de Bug Bounty oficial com tokens FIRE**.
-
----
-
-## 📬 Reporte Seguro de Vulnerabilidades
-
-Encontrou uma possível falha de segurança?  
-**Nunca compartilhe detalhes publicamente.** Utilize um dos canais abaixo:
-
-- 🔐 Mensagem direta no [LinkedIn (Guilherme Lima)](https://www.linkedin.com/in/guilhermelimadev-web3/)
-- 🛡️ Issue privada no GitHub com a tag `security`
-
-Não exigimos KYC para colaborador nem formulários extensos: você fala diretamente com o autor e responsável técnico.
+**Projeto:** FireChain CLI  
+**Autor:** Guilherme Lima  
+**Versão:** 2.0 (2025)  
+**Jurisdicação Legal:** República Federativa do Brasil  
+**Conformidade Técnica:** ISO/IEC 27001:2022, ISO/IEC 27400:2022, OWASP, RFC 6979, GDPR (EU)
 
 ---
 
-## 🧠 Escopo Técnico de Interesse
+## 🧾 1. Compromisso Institucional
 
-Aceitamos análises responsáveis e reprodutíveis que envolvam:
-
-- Comprometimento na geração ECDSA-secp256k1
-- Vazamento de chaves privadas (direto ou via derivação)
-- Bypass de zeroização de memória (`zeroize`)
-- Fragilidades em hashing (SHA256, Keccak, RIPEMD160)
-- Criptografia insegura na exportação `.wallet` (AES-256-GCM, Argon2id)
-- Falhas em validação de argumentos CLI (`--unsafe-*`)
-- Injeções via STDIN ou manipulação do modo `--json` (planejado)
+A FireChain CLI é construída sob o princípio de **segurança por design**, com foco em **soberania digital, criptografia de ponta, execução local e independência de rede**.  
+Esta política estabelece regras formais de análise, reporte e tratamento de vulnerabilidades em conformidade com padrões internacionais e boas práticas regulatórias.
 
 ---
 
-## 🚫 Fora de Escopo
+## 🧠 2. Escopo Técnico de Interesse
 
-- Bugs de UI/UX ou sugestões de CLI
-- Relatórios genéricos com ferramentas automatizadas sem PoC
-- Ações esperadas por design quando `--unsafe-*` for usado
-- Vulnerabilidades dependentes de sistemas externos (SO, shell, hardware)
+Aceitamos contribuições e auditorias técnicas que envolvam:
 
----
+- Comprometimento da curva elíptica ECDSA `secp256k1`
+- Vazamento direto ou indireto de chaves privadas
+- Falhas de zeroização de memória (`zeroize`)
+- Colisões, preimage attacks ou fraqueza nos algoritmos: `SHA-256`, `Keccak-256`, `RIPEMD160`
+- Quebra ou má implementação de `AES-256-GCM` ou `Argon2id` (criptografia de `.wallet`)
+- Injeções via `STDIN`, abusos de `--unsafe-*`, manipulação do modo `--json`
+- Desvios de fingerprint ou wallet ID via inputs maliciosos
 
-## ⏱️ Política de Resposta
-
-Nos comprometemos com os seguintes prazos:
-
-| Tipo de Relato     | Tempo de Resposta | Patch/Correção         |
-|--------------------|-------------------|-------------------------|
-| Crítica (exploit)  | 24h úteis         | Correção imediata       |
-| Média              | 48–72h úteis      | Correção prioritária    |
-| Baixa              | Até 5 dias úteis  | Correção em release     |
-
-Todos os casos terão acompanhamento pessoal do autor, com confidencialidade garantida.  
-Quando autorizado, nomes dos contribuidores serão publicados no `CHANGELOG.md`.
+**Todos os testes devem ser reproduzíveis, éticos e tecnicamente embasados.**
 
 ---
 
-## 🏆 Bug Bounty — Recompensas FIRE
+## 🚫 3. Fora de Escopo
 
-Recompensamos quem fortalece nossa stack.  
-As recompensas são pagas em nosso token nativo **FIRE** e transferidas on-chain:
+Os seguintes itens são excluídos da nossa política de resposta:
 
-| Severidade | Exemplo Técnico                                      | Recompensa Estimada (FIRE) |
-|------------|-------------------------------------------------------|-----------------------------|
-| ⚠️ Baixa   | Hash fraco, argumentação insegura, observações      | 50–100 FIRE                |
-| 🚨 Média   | Vazamento de chave privada via uso comum            | 200–400 FIRE               |
-| 🔥 Crítica | Exploit funcional, desvio completo de segurança     | 500–1000+ FIRE + destaque  |
-
-Sem burocracia, sem bancos, sem barreiras.  
-Isso é Web3 como deveria ser.
+- Bugs visuais ou estéticos no terminal (CLI/UX)
+- Alertas genéricos de scanners sem PoC funcional
+- Vulnerabilidades que dependam exclusivamente de sistemas externos (SO, shell, hardware)
+- Ações esperadas ao usar opções de risco (`--unsafe-*`)
+- Critérios fora do modelo de ameaça documentado
 
 ---
 
-## 🤝 Código de Ética do Pesquisador
+## 🛡️ 4. Processo Seguro de Reporte
 
-Para garantir recompensa e reconhecimento público:
+### 📫 Canais Oficiais de Reporte
 
-- ❌ Não divulgar publicamente antes da correção oficial
-- ✅ Manter conduta responsável e ética
-- ✅ Garantir reprodutibilidade mínima com descrição clara
+- 🔐 Mensagem privada para [Guilherme Lima – LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)
+- 🛡️ Issue privada com tag `security` no GitHub (criptografar dados sensíveis)
 
-Pesquisadores que cooperam de forma construtiva são tratados como parceiros, não adversários.
+### 📋 Requisitos para análise
+- Prova de conceito (PoC)
+- Descrição técnica clara, sem scripts obscuros
+- Comportamento reprodutível no ambiente local FireChain CLI
 
----
-
-## 📄 Compliance e Licença
-
-Este projeto é licenciado sob os termos da [Licença MIT (Português)](./LICENSE).
-
-Colaboradores que reportam vulnerabilidades e recebem recompensa aceitam os termos desta licença, inclusive a cláusula de **isenção de responsabilidade legal**.
+**🚫 Não aceitamos divulgação pública sem coordenação prévia.**
 
 ---
 
-## 💬 Última mensagem
+## ⏱️ 5. Política de Resposta e SLA
 
-Você não precisa ser hacker para entender segurança.  
-Mas aqui, recompensamos quem pensa como um — para proteger os demais.
+| Severidade        | Resposta Inicial     | Correção Oficial         |
+|-------------------|----------------------|--------------------------|
+| 🔥 Crítica        | ≤ 24h úteis          | Patch imediato ou mitigação emergencial |
+| 🚨 Média          | ≤ 72h úteis          | Inclusão em próxima release prioritária |
+| ⚠️ Baixa          | ≤ 5 dias úteis       | Correção em release futura planejada    |
 
-> “Segurança é quando você sabe exatamente o que cada byte faz.”  
-> – FireChain™
+Todos os relatórios serão tratados com **confidencialidade, rastreabilidade e respeito técnico**.
 
 ---
 
-**Guilherme Lima**  
-Arquiteto e responsável técnico  
-🔗 [LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)
+## 🏆 6. Programa de Recompensas (Bug Bounty)
+
+A FireChain recompensa contribuições reais com seu token nativo **FIRE**, sem burocracia, KYC ou intermediários.
+
+| Severidade | Exemplos Técnicos                                | Recompensa Estimada (FIRE) |
+|------------|--------------------------------------------------|-----------------------------|
+| ⚠️ Baixa   | Má validação de argumentos, hash fraco           | 50–100 FIRE                |
+| 🚨 Média   | Vazamento de chaves privadas, bypass de segurança| 200–400 FIRE               |
+| 🔥 Crítica | Exploit funcional, controle total da CLI         | 500–1000+ FIRE + destaque  |
+
+Recompensas são pagas **on-chain**, com prova pública de transferência.
+
+---
+
+## 🤝 7. Código de Ética do Pesquisador
+
+Para qualificação no programa:
+
+- ✅ Conduta responsável e ética
+- ✅ Divulgação coordenada (responsible disclosure)
+- ✅ Reprodutibilidade técnica mínima
+- ❌ Nunca publicar vulnerabilidades antes da correção oficial
+
+**Colaboradores éticos são tratados como parceiros, não adversários.**
+
+---
+
+## 💼 8. Conformidade e Licenciamento
+
+- Este projeto é licenciado sob os termos da [Licença MIT](./LICENSE.md)
+- Para usos comerciais, consultar [COMMERCIAL_LICENSE_FIRECHAIN.md](./COMMERCIAL_LICENSE_FIRECHAIN.md)
+- A política de segurança integra o modelo de **compliance técnico e jurídico da FireChain CLI**
+
+---
+
+## ⚖️ 9. Validade Jurídica
+
+Esta política possui **validade jurídica vinculante**.  
+Seu conteúdo está em conformidade com os seguintes marcos regulatórios e normativos:
+
+- 🇧🇷 Legislação Brasileira (Lei nº 9.609/98 – Software)
+- 🇧🇷 Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/18)
+- 🇪🇺 GDPR (EU) – Art. 32, 33 e 34
+- 📘 ISO/IEC 27001:2022 – Gestão de Segurança da Informação
+- 📘 ISO/IEC 27400:2022 – Cibersegurança em IoT
+- 🛠️ OWASP Top 10 – Boas práticas de segurança de software
+- 📜 RFC 6979 – Deterministic ECDSA
+
+---
+
+## 📬 10. Contato Técnico e Legal
+
+Responsável: **Guilherme Lima** – Arquiteto e mantenedor do projeto
+
+- 🔗 [LinkedIn – Contato direto](https://www.linkedin.com/in/guilhermelimadev-web3/)
+- 📩 Solicitações formais e relatórios avançados podem ser discutidos sob NDA
+
+---
+
+**FireChain CLI © Guilherme Lima 2025 – Segurança não é uma opção, é fundação.**

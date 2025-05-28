@@ -1,3 +1,4 @@
-//! 🧰 Módulo central de utilitários
+// 📂 src/utils/mod.rs
 
-pub mod address;
+/// 🎨 Utilitários de formatação visual para terminal (banners, mensagens com cor, etc.)
+pub mod format;

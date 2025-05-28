@@ -1,0 +1,20 @@
+src/
+├── bin/
+│   └── main.rs                  # 🚀 Ponto de entrada CLI
+├── cli/
+│   ├── handler.rs               # 🧠 Dispatcher central
+│   ├── parser.rs                # 🧭 Parser `clap`
+│   ├── mod.rs                   # 📦 Registro CLI
+│   └── derive.rs                # 🧬 Novo comando: geração multi-address
+├── core/
+│   ├── address.rs               # 🔗 BTC-like address
+│   ├── crypto.rs                # ♻️ Hash functions
+│   ├── wallet.rs                # 🔐 Chaves e identidade
+│   ├── mod.rs                   # 📦 Registro do core
+├── utils/
+│   ├── format.rs                # 🎨 UX visual
+│   └── mod.rs                   # 📦 Registro de utilitários
+├── tests/
+│   ├── wallet_tests.rs          # 🧪 Testes de carteira
+│   └── derive_tests.rs          # 🧪 Testes do comando derive
+├── lib.rs                       # 🔁 Módulo principal

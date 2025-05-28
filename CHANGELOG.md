@@ -7,6 +7,68 @@ Desde o início, o projeto foi concebido com foco em modularidade, segurança re
 
 Todas as versões abaixo refletem **marcos técnicos reais** no avanço da arquitetura.
 
+Todos os updates importantes neste projeto serão documentados aqui.
+
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/)
+e segue os princípios de versionamento semântico ([SemVer](https://semver.org/lang/pt-BR/)).
+
+---
+
+
+## [v0.1.3] - 2025-05-28
+
+### ✨ Adicionado
+- Comando `derive` com suporte completo aos formatos de endereço:
+  - **₿ Bitcoin (Base58Check, prefixo 0x00, compatível com P2PKH)**.
+  - **⛓️ Ethereum (últimos 20 bytes do Keccak-256 da chave pública sem prefixo 0x04)**.
+  - **🔥 FireChain (base58 com checksum SHA-256 + prefixo `f1r3`)**.
+- Campo `fingerprint` derivado do SHA-256 da chave pública (6 bytes iniciais) + ID no formato `FC-<FINGERPRINT>`.
+- CLI modular separada em `cli/parser.rs` e `cli/handler.rs`, elevando coesão e escalabilidade.
+- Estilização premium de terminal com suporte a cores (`termcolor`) e emojis intuitivos.
+- Novos testes automatizados cobrindo funcionalidades críticas.
+
+### 🧠 Alterado
+- **Remoção do campo `address` da estrutura `Wallet`**.
+  - A geração de endereço agora é externa e modular (via `derive` e `address.rs`).
+- **Refatoração completa de `main.rs`**:
+  - Simplificação da execução com `.parse()` e encaminhamento de comando.
+- `cli.rs` agora é dividido entre parsing (`parser.rs`) e execução (`handler.rs`), seguindo padrão Command Handler.
+
+### ✅ Testes
+- `tests/wallet_tests.rs`: Garante geração consistente de chaves privadas/públicas via `secp256k1`.
+- `tests/derive_tests.rs`: Valida a integridade dos formatos BTC, ETH e F1R3 com entradas hexadecimais.
+
+### 🛠️ Infraestrutura
+- Atualização de `Cargo.toml` com dependências essenciais:
+  - [`clap`](https://docs.rs/clap/4.0.0) (`Parser` para linha de comando)
+  - [`termcolor`](https://docs.rs/termcolor/) (colorização cross-platform para terminal)
+  - [`bs58`](https://docs.rs/bs58/) (codificação Base58)
+  - `hex`, `secp256k1`, `rand` (cripto e geração de chave)
+- Build 100% funcional com `cargo build --release` e `cargo install --path .`
+
+### 📁 Estrutura Final de Diretórios
+
+```bash
+src/
+├── bin/
+│   └── main.rs              🚀 Ponto de entrada
+├── cli/
+│   ├── mod.rs               📦 Declaração CLI
+│   ├── parser.rs            🧭 CLI com `clap`
+│   ├── handler.rs           🧠 Lógica por comando
+│   └── derive.rs            📡 Comando de derivação de endereços
+├── core/
+│   ├── mod.rs               📦 Núcleo lógico da FireChain
+│   ├── wallet.rs            🔐 Geração e gestão de carteiras
+│   ├── address.rs           🔗 Hashes e formatação de endereços
+│   └── crypto.rs            ♻️  Hashing centralizado (keccak, ripemd, sha256)
+├── utils/
+│   └── format.rs            🧰 Estilo de saída e termcolor
+├── tests/
+│   ├── wallet_tests.rs      🧪 Testes de geração de carteira
+│   └── derive_tests.rs      🧪 Testes de formatação de endereço
+├── lib.rs                   🔁 Conecta todos os módulos
+```
 ---
 
 ## [v0.1.2] — 2025-05-27
