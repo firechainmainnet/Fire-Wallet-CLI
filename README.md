@@ -129,11 +129,6 @@ $ firechain-cli derive --all
 ✅ Derivação concluída com sucesso!
 ⚠️  Nunca compartilhe sua chave privada.
 ```
-
----
-
-(continua no próximo bloco para manter dentro dos limites)
-
 ---
 
 ## 🖥️ Ajuda Rápida
