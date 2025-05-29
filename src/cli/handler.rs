@@ -1,42 +1,49 @@
-// 📂 src/cli/handler.rs
-
-use crate::cli::parser::Commands;
-use crate::cli::derive;
-use crate::core::wallet::Wallet;
-use crate::core::crypto::sha256;
+use colored::Colorize;
 use hex;
+use crate::core::wallet::Wallet;
+use crate::core::address::{generate_btc_address, generate_eth_address, generate_fire_address};
+use crate::cli::parser::NewArgs;
+use crate::utils::crypto::aes::encrypt_wallet;
+use crate::cli::format::print_new_wallet_summary;
 
-/// 🧠 Lógica dos comandos executáveis via CLI
-pub fn handle_command(command: &Commands) {
-    match command {
-        Commands::New => {
-            let wallet = Wallet::new();
+pub fn handle_new_command(args: &NewArgs) {
+    println!("{}", "🔐 Iniciando criação da carteira FireChain...\n".bold());
 
-            // Gera fingerprint curta da chave pública (primeiros 6 bytes do SHA256)
-            let fingerprint_bytes = sha256(wallet.public_key.as_bytes());
-            let fingerprint = hex::encode(&fingerprint_bytes[..6]);
-            let wallet_id = &fingerprint[..12].to_uppercase();
+    let (private_key, public_key, fingerprint) = Wallet::generate_wallet_identity();
+    let wallet = Wallet::new(private_key.clone(), public_key.clone(), fingerprint.clone());
 
-            println!("\n🔥 FireChain CLI");
-            println!("🧬 Segurança blockchain com modularidade, criptografia e elegância CLI-first\n");
+    let pubkey_bytes = hex::decode(&public_key).unwrap();
 
-            println!("🔐 Chave Pública : {}", wallet.public_key);
-            println!("🔒 Chave Privada : {}", wallet.private_key);
-            println!("🧬 Fingerprint    : {}", fingerprint);
-            println!("🆔 Wallet ID      : FC-{}\n", wallet_id);
+    let eth_address = generate_eth_address(&pubkey_bytes);
+    let btc_address = generate_btc_address(&pubkey_bytes);
+    let fire_address = generate_fire_address(&pubkey_bytes);
 
-            println!("🎯 Use o comando `derive` para gerar endereços BTC, ETH e FireChain.");
+    print_new_wallet_summary(&wallet, &eth_address, &btc_address, &fire_address);
+
+    // 📁 Se --out for None, usamos <fingerprint>.wallet
+    let output_path = match &args.out {
+        Some(path) if !path.trim().is_empty() => path.clone(),
+        _ => format!("{}.wallet", wallet.fingerprint),
+    };
+
+    match encrypt_wallet(&wallet, &args.password) {
+        Ok(encrypted_data) => {
+            match std::fs::write(&output_path, encrypted_data) {
+                Ok(_) => {
+                    println!("{}", "✅ Carteira criada e criptografada com sucesso!\n".green().bold());
+                    println!(
+                        "{} {}",
+                        "📁 Arquivo salvo em:".dimmed(),
+                        output_path.as_str().bold().yellow()
+                    );
+                }
+                Err(e) => {
+                    eprintln!("{} {}", "❌ Erro ao salvar a carteira:".red(), e);
+                }
+            }
         }
-
-        Commands::Derive(args) => {
-            derive::execute(args);
-        }
-
-        Commands::Help => {
-            println!("ℹ️  Use `firechain-cli <comando>` para acessar funcionalidades:");
-            println!("  • new      🔐 Gera uma nova carteira");
-            println!("  • derive   📡 Deriva múltiplos endereços (BTC, ETH, F1R3)");
-            println!("  • help     ℹ️ Mostra esta ajuda\n");
+        Err(e) => {
+            eprintln!("{} {}", "❌ Erro ao criptografar a carteira:".red(), e);
         }
     }
 }

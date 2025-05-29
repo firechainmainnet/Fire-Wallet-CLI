@@ -1,4 +1,5 @@
-// 📂 src/utils/mod.rs
+// 🧱 Módulo raíz de utilitários FireChain
+// Organiza funções auxiliares reutilizáveis
 
-/// 🎨 Utilitários de formatação visual para terminal (banners, mensagens com cor, etc.)
-pub mod format;
+pub mod format; // 🎨 Funções de estilização e output
+pub mod crypto; // 🔐 Camada de criptografia simétrica (AES-GCM)

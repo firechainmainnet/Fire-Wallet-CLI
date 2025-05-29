@@ -1,9 +1,6 @@
-// 📂 src/cli/parser.rs
-
 use clap::{Parser, Subcommand, Args};
 
 /// 🧬 FireChain CLI — Carteira Web3 com foco em segurança, modularidade e UX premium.
-///
 /// CLI profissional para geração, derivação e gestão de identidades blockchain.
 /// Ideal para devs Web3, apps self-custodial, validadores e operações seguras.
 #[derive(Parser)]
@@ -20,9 +17,8 @@ Comandos disponíveis:
   🧬 derive   → Deriva múltiplos endereços compatíveis (BTC, ETH, FireChain)
 
 Exemplo de uso:
-  firechain-cli new
+  firechain-cli new --password "minhaSenha"
   firechain-cli derive --all
-  firechain-cli derive --btc
 
 Desenvolvido com segurança client-side e UX profissional.
 "#
@@ -37,7 +33,7 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     /// 🔐 Gera uma nova carteira FireChain
-    New,
+    New(NewArgs),
 
     /// 🧬 Deriva múltiplos endereços (BTC, ETH, FireChain)
     Derive(DeriveArgs),
@@ -45,6 +41,18 @@ pub enum Commands {
     /// ℹ️ Mostra ajuda detalhada da FireChain CLI
     #[command(hide = true)]
     Help,
+}
+
+/// 🛠️ Argumentos para o comando `new`
+#[derive(Args, Debug)]
+pub struct NewArgs {
+    /// 🔑 Senha obrigatória para criptografar a carteira
+    #[arg(long, help = "Senha utilizada para proteger o arquivo .wallet")]
+    pub password: String,
+
+    /// 📄 Caminho para salvar o arquivo .wallet. Se omitido, será salvo como <fingerprint>.wallet
+    #[arg(long, help = "Caminho de saída personalizado (opcional)")]
+    pub out: Option<String>,
 }
 
 /// ⚙️ Flags disponíveis para o comando `derive`

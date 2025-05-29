@@ -14,6 +14,34 @@ e segue os princípios de versionamento semântico ([SemVer](https://semver.org/
 
 ---
 
+## [v0.1.3] - 2025-05-29
+
+### 🔐 Segurança e Criptografia Reforçada
+- 🔑 Adicionada criptografia client-side com AES-256-GCM e autenticação por HMAC-SHA256
+- 🧠 Proteção obrigatória por senha via `--password`, utilizando derivação Argon2id com parâmetros ajustáveis
+- ♻️ Aplicado Zeroizing para apagar da memória dados sensíveis como chaves privadas e senhas derivadas
+- ✅ Todos os dados são serializados com `serde_json` e criptografados localmente sem dependência externa
+
+### 💾 Persistência Inteligente e Compatível
+- 📁 Novo sistema de nomeação automática: se `--out` for omitido, o arquivo `.wallet` é salvo como `<fingerprint>.wallet`, garantindo unicidade e rastreabilidade
+- 🔄 Extensão `.wallet` adotada como padrão interoperável com futuros carregadores de DEX, scripts e ferramentas self-custodial
+- 🧱 Campo `--out` reestruturado para `Option<String>`, permitindo flexibilidade máxima sem quebra de compatibilidade
+
+### 🌈 UX Premium de Linha de Comando
+- 🎨 Terminal com visual aprimorado: `.bold()`, `.dimmed()`, `.green()`, `.yellow()` e mensagens contextuais
+- 📦 Exibição organizada da fingerprint, chaves e endereços (BTC, ETH, FireChain) com ícones por tipo
+- ✅ UX 100% sem ruído: mensagens só aparecem quando necessárias e sempre com semântica clara
+
+### 🧱 Refatorações Técnicas de Arquitetura
+- 🧠 Atualização completa em `parser.rs` e `handler.rs` com separação de responsabilidades e lógica declarativa
+- 📦 Removido fallback legado de `wallet.fire` para abrir caminho ao modelo baseado em fingerprint
+- 🔍 Modularização e comentários no código para maior manutenibilidade e onboarding de contribuidores
+
+---
+
+🔄 Esta atualização marca a consolidação da FireChain CLI como ferramenta segura, interoperável e pronta para integração em pipelines Web3 e validações em produção.
+
+---
 
 ## [v0.1.3] - 2025-05-28
 

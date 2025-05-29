@@ -18,6 +18,7 @@ default-run = "firechain-cli"
 
 # ▶️ Saída de terminal com cor e destaque visual
 termcolor = "1.4"
+colored = "2.0" # 🌈 UX premium no terminal
 
 # ▶️ Geração de chaves e assinaturas
 secp256k1 = { version = "0.24", features = ["rand"] }
@@ -35,6 +36,20 @@ once_cell = "1.19"
 
 # ▶️ CLI robusta com UX premium
 clap = { version = "4.5", features = ["derive"] }
+
+# ▶️ Serialização e deserialização de dados
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0" # ✅ Usado para salvar e carregar carteiras com precisão
+
+# ────────────────────────────────────────────────────────────────
+# 🔐 DEPENDÊNCIAS DE SEGURANÇA REAL — Criptografia AES-GCM + HMAC + Argon2
+# ────────────────────────────────────────────────────────────────
+aes-gcm = "0.10"
+aead = "0.5"
+hmac = "0.12"
+argon2 = "0.5"
+rand_core = "0.6"
+zeroize = "1.6"
 
 # ────────────────────────────────────────────────────────────────
 # 🧪 DEPENDÊNCIAS DE TESTES — Garantia de qualidade e confiabilidade

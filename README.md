@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="assets/firechain_banner.png" alt="FireChain CLI" width="600px" />
 </p>
@@ -9,11 +8,16 @@
   <img src="https://img.shields.io/badge/Rust-2021-934c97" />
   <img src="https://img.shields.io/badge/CLI-Clap%204.5-orange" />
   <img src="https://img.shields.io/badge/Hashing-SHA2%20%7C%20Keccak%20%7C%20RIPEMD160-FF6D00" />
+  <img src="https://img.shields.io/badge/AES-GCM%20%2B%20HMAC-00695C" />
+  <img src="https://img.shields.io/badge/Derivador-Argon2id-546E7A" />
+  <img src="https://img.shields.io/badge/Arquivo-.wallet%20auto-FF7043" />
   <img src="https://img.shields.io/badge/execução-100%25%20local-blue" />
   <img src="https://img.shields.io/badge/memória-zeroizada-purple" />
-  <img src="https://img.shields.io/badge/fingerprint-unico%20por%20carteira-9C27B0" />
+  <img src="https://img.shields.io/badge/fingerprint-identidade%20única-9C27B0" />
   <img src="https://img.shields.io/badge/Testes-Reais%20via%20CLI-green" />
   <img src="https://img.shields.io/badge/Cobertura-100%25-4CAF50" />
+  <img src="https://img.shields.io/badge/Criptografia-AES256%20%7C%20Argon2id-blueviolet" />
+  <img src="https://img.shields.io/badge/Extensão-.wallet%20compatível-blue" />
   <img src="https://img.shields.io/badge/License-COMMERCIAL-red" />
   <img src="https://img.shields.io/github/last-commit/firechainmainnet/fire-wallet-cli" />
   <img src="https://img.shields.io/github/issues/firechainmainnet/fire-wallet-cli" />
@@ -25,7 +29,7 @@
 # 🔥 FireChain CLI
 
 **🧱 Sua stack Web3 começa na linha de comando.**  
-Interface de linha de comando local, modular e segura para gerar carteiras com múltiplos padrões de endereços — **Bitcoin (₿), Ethereum (⛓️) e FireChain (🔥)** — com **criptografia de ponta e identidade única por fingerprint**.
+Interface de linha de comando local, modular e segura para gerar carteiras com múltiplos padrões de endereços — **Bitcoin (₿), Ethereum (⛓️) e FireChain (🔥)** — com **criptografia avançada, exportação `.wallet` e identidade única por fingerprint**.
 
 ---
 
@@ -44,38 +48,60 @@ Interface de linha de comando local, modular e segura para gerar carteiras com m
 
 ## 🧬 Sobre
 
-A **FireChain CLI** é uma ferramenta ultra-segura para geração de carteiras Web3 com identidade criptográfica.  
-Feita 100% em **Rust**, zero dependência externa, zero rede, perfeita para:
+A **FireChain CLI** é uma ferramenta ultra-segura para geração de carteiras Web3 com identidade criptográfica e arquivos `.wallet` criptografados.  
+Feita 100% em **Rust**, sem dependências externas e sem conexões de rede. Ideal para:
 
 - 🧑‍💻 Desenvolvedores que controlam sua stack
 - 🛡️ Times de segurança e auditoria
 - 🔗 Integração com automações e CI/CD
-- 🧬 Criptografia offline e testável
+- 🧬 Criptografia offline real e verificável
 
 ---
 
 ## 🔑 Princípios
 
-- 🔐 Segurança desde a geração até a derivação
+- 🔐 Segurança desde a geração até o armazenamento
 - 🔭 Identidade única com `fingerprint` e `wallet ID`
 - 🎯 100% CLI local, sem exposição externa
-- 🎨 Interface moderna com `termcolor` + emojis
-- 🔬 Testes reais com cobertura total
+- 🎨 Interface moderna com UX premium
+- 🔬 Testes reais e auditáveis com cobertura total
 
 ---
 
 ## ⚙️ Funcionalidades Atuais
 
-- ✅ Geração de chave privada/publica com `secp256k1`
+- ✅ Geração de chave privada/pública com `secp256k1`
+- ✅ Criptografia AES-256-GCM com HMAC-SHA256
+- ✅ Proteção por senha com derivação Argon2id (`--password`)
+- ✅ Salvamento automático como `<fingerprint>.wallet` ao omitir `--out`
+- ✅ Campo `--out` agora é opcional (`Option<String>`)
 - ✅ Derivação de endereços BTC, ETH e FireChain
-- ✅ Identidade por fingerprint (`FC-xxxx`)
-- ✅ Modularização da CLI (`parser`, `handler`, `derive`)
-- ✅ Estilo premium para terminal (`termcolor`)
-- ✅ Testes automatizados com `assert_cmd`
+- ✅ Identidade única por fingerprint (`FC-xxxx`)
+- ✅ Modularização clara (`parser`, `handler`, `derive`)
+- ✅ UX premium de terminal com `termcolor`, emojis e semântica visual
+- ✅ Testes automatizados com `assert_cmd` e saída validável
 
 ---
 
 ## 🧠 Execução Real
+
+```bash
+$ firechain-cli new --password "minhaSenha"
+
+🔐 Iniciando criação da carteira FireChain...
+
+📦 Carteira Gerada com Sucesso:
+🔐 Fingerprint: c79449d3b8ad733a5e9875c8d19b8263d570303d
+🧠 Chave Pública: 04abc...
+🔒 Chave Privada: 1234abcd...
+🔥 Endereço FireChain: f1r3...
+🪙 Endereço Ethereum: 0x...
+🪙 Endereço Bitcoin: 1...
+
+✅ Carteira criada e criptografada com sucesso!
+
+📁 Arquivo salvo em: c79449d3b8ad733a5e9875c8d19b8263d.wallet
+```
 
 ```bash
 $ firechain-cli derive --all
@@ -131,7 +157,10 @@ src/
 │   ├── wallet.rs
 │   ├── address.rs
 │   └── crypto.rs
-├── utils/format.rs          🧰 Estilização e helpers
+├── utils/                   🧰 Utilitários
+│   ├── format.rs            🎨 Estilo e saída
+│   └── crypto/
+│       └── aes.rs           🔐 Criptografia AES-GCM + HMAC
 ├── tests/                   🧪 Testes automatizados
 │   ├── wallet_tests.rs
 │   └── derive_tests.rs
@@ -154,22 +183,21 @@ src/
 
 ## 📄 Licenciamento, Segurança e Contato Oficial
 
-> Esta seção reúne as diretrizes jurídicas, permissões de uso, termos de licenciamento e política de segurança aplicáveis à FireChain CLI.  
-> Toda utilização do projeto implica na aceitação integral dos documentos aqui vinculados.
+> Esta seção resume diretrizes jurídicas, termos de licenciamento e política de segurança da FireChain CLI.  
+> O uso deste projeto implica na aceitação plena desses termos.
 
 ---
 
 ### 🔓 Licença de Uso Livre (MIT)
 
-Este projeto é publicado sob os termos da [Licença MIT](./LICENSE.md), amplamente adotada em software open-source.  
+Este projeto é publicado sob os termos da [Licença MIT](./LICENSE.md).
 
 **✔️ Permissões**  
-- Uso, modificação e redistribuição para fins pessoais, educacionais e técnicos
-- Integração livre em projetos não comerciais
+- Uso, modificação e redistribuição para fins não comerciais
 
 **⚠️ Limitações**  
-- **Sem garantias** (como previsto na própria licença)
-- **Não cobre uso institucional, corporativo ou com monetização direta ou indireta**
+- Sem garantias
+- Uso corporativo exige licenciamento comercial
 
 🔗 [Ver documento completo – LICENSE.md](./LICENSE.md)
 
@@ -177,15 +205,11 @@ Este projeto é publicado sob os termos da [Licença MIT](./LICENSE.md), amplame
 
 ### 💼 Licença Comercial FireChain™
 
-O uso da FireChain CLI em **ambientes corporativos, produtos comerciais, serviços Web3 com fins lucrativos ou integração OEM** requer o aceite e contratação sob os termos da nossa [Licença Comercial FireChain™](./COMMERCIAL_LICENSE_FIRECHAIN.md).
+Uso em ambientes corporativos, produtos comerciais ou serviços Web3 requer [Licença Comercial FireChain™](./COMMERCIAL_LICENSE_FIRECHAIN.md).
 
-**🏛️ Jurisdição Legal**  
-- Aplicável sob o direito brasileiro, com validade internacional
-
-**📌 Exemplos de uso que requerem licença**  
-- Distribuição como SDK, white-label, SaaS ou custódia
-- Prestação de serviços com base na CLI
-- Branding derivado da marca FireChain™
+**Exemplos de uso que exigem licença:**
+- White-label, SDK, SaaS, custódia ou derivados da CLI
+- Monetização direta ou indireta
 
 🔗 [Ver documento completo – COMMERCIAL_LICENSE_FIRECHAIN.md](./COMMERCIAL_LICENSE_FIRECHAIN.md)
 
@@ -193,22 +217,18 @@ O uso da FireChain CLI em **ambientes corporativos, produtos comerciais, serviç
 
 ### 🔐 Política de Segurança Técnica
 
-A segurança da FireChain CLI é tratada como requisito **não funcional essencial**.  
-Mantemos uma [Política Oficial de Segurança](./SECURITY.md) pública com:
+Mantemos uma [Política Oficial de Segurança](./SECURITY.md) com:
 
-- 🧠 Escopo técnico auditável
-- 🛡️ Processo de resposta a incidentes
-- 🏆 Programa Bug Bounty nativo (com tokens FIRE)
-- ⏱️ SLAs documentados para tratamento de vulnerabilidades
+- 🛡️ Escopo técnico auditável
+- ⏱️ SLA de resposta
+- 🏆 Programa Bug Bounty com tokens FIRE
 
 🔗 [Ver documento completo – SECURITY.md](./SECURITY.md)
 
 ---
 
-### 🤝 Suporte, Parcerias e Licenciamento
+### 🤝 Contato Oficial
 
-**Responsável técnico e legal:**  
-👤 Guilherme Lima – Arquiteto da FireChain CLI
-
-**Contato direto para propostas comerciais, auditorias ou parcerias:**  
-🔗 [https://www.linkedin.com/in/guilhermelimadev-web3/](https://www.linkedin.com/in/guilhermelimadev-web3/)
+**Responsável Técnico e Legal:**  
+👤 Guilherme Lima — Arquiteto da FireChain CLI  
+🔗 [linkedin.com/in/guilhermelimadev-web3](https://www.linkedin.com/in/guilhermelimadev-web3/)
