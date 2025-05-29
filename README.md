@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="assets/firechain_banner.png" alt="FireChain CLI" width="600px" />
 </p>
@@ -38,10 +39,11 @@ Interface de linha de comando local, modular e segura para gerar carteiras com m
 - [🧬 Sobre](#-sobre)
 - [🔑 Princípios](#-princípios)
 - [⚙️ Funcionalidades Atuais](#️-funcionalidades-atuais)
-- [🧠 Execução Real](#-execução-real)
+- [🧠 Execução Real em Produção](#-execução-real-em-produção)
 - [🖥️ Ajuda Rápida](#️-ajuda-rápida)
 - [📁 Arquitetura de Diretórios](#-arquitetura-de-diretórios)
 - [🧱 Roadmap Técnico 2025](#-roadmap-técnico-2025)
+- [📄 CHANGELOG Técnico](./CHANGELOG.md)
 - [📄 Licenças e Contato](#-licenças-e-contato)
 
 ---
@@ -83,7 +85,7 @@ Feita 100% em **Rust**, sem dependências externas e sem conexões de rede. Idea
 
 ---
 
-## 🧠 Execução Real
+## 🧠 Execução Real em Produção
 
 ```bash
 $ firechain-cli new --password "minhaSenha"
@@ -104,6 +106,12 @@ $ firechain-cli new --password "minhaSenha"
 ```
 
 ```bash
+$ firechain-cli new --password "minhaSenha" --out minha_wallet_secreta.wallet
+
+📁 Arquivo salvo como: minha_wallet_secreta.wallet
+```
+
+```bash
 $ firechain-cli derive --all
 
 🔥 FireChain CLI
@@ -121,6 +129,10 @@ $ firechain-cli derive --all
 ✅ Derivação concluída com sucesso!
 ⚠️  Nunca compartilhe sua chave privada.
 ```
+
+---
+
+(continua no próximo bloco para manter dentro dos limites)
 
 ---
 
@@ -178,6 +190,15 @@ src/
 | Suporte a `--json` para integração   | 🔲 Planejado   |
 | Importação por chave privada         | 🔲 Planejado   |
 | `balance` via indexer FireChain      | 🔲 Pesquisa    |
+
+---
+
+## 📄 CHANGELOG Técnico
+
+> Histórico completo de versões, recursos e refatorações da FireChain CLI.  
+> Transparência e rastreabilidade técnica mantida desde o início do projeto.
+
+🔗 [Ver CHANGELOG.md](./CHANGELOG.md)
 
 ---
 
