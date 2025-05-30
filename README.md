@@ -44,7 +44,6 @@ Interface de linha de comando modular, auditável e 100% offline para geração 
 - [⚙️ Funcionalidades Atuais](#️-funcionalidades-atuais)
 - [🧠 Execução Real em Produção](#-execução-real-em-produção)
 - [🖥️ Ajuda Rápida](#️-ajuda-rápida)
-- [📁 Arquitetura de Diretórios](#-arquitetura-de-diretórios)
 - [🧱 Roadmap Técnico 2025](#-roadmap-técnico-2025)
 - [📄 CHANGELOG Técnico](./CHANGELOG.md)
 - [📄 Licenças e Contato](#-licenças-e-contato)
@@ -130,30 +129,6 @@ COMMANDS:
     export    📁 Exporta carteira segura
     recover   ♻️ Recupera carteira
 ```
-
----
-
-## 📁 Arquitetura de Diretórios
-
-src/
-├── bin/main.rs              🚀 Entry point
-├── cli/
-│   ├── mod.rs
-│   ├── parser.rs
-│   ├── handler.rs
-│   └── derive.rs
-├── core/
-│   ├── mod.rs
-│   ├── wallet.rs
-│   ├── address.rs
-│   └── crypto.rs
-├── utils/
-│   ├── format.rs
-│   ├── export.rs
-│   ├── recover.rs
-│   └── crypto/
-│       └── aes.rs
-└── lib.rs                   🔁 Conector de módulos
 
 ---
 
