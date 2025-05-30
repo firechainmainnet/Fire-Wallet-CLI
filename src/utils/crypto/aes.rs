@@ -1,90 +1,85 @@
-use aes_gcm::{
-    aead::{Aead, KeyInit, OsRng},
-    Aes256Gcm, Key, Nonce,
-};
-use argon2::Argon2; // ✅ Apenas o necessário
+
+use aes_gcm::{Aes256Gcm, Nonce};
+use aes_gcm::aead::{Aead, KeyInit};
+
+use argon2::Argon2;
+use password_hash::{PasswordHasher, SaltString}; // ✅ Trait necessário agora incluso
+
 use hmac::{Hmac, Mac};
 use sha2::Sha256;
-use rand_core::RngCore;
-use zeroize::Zeroizing;
+use rand_core::{RngCore, OsRng};
 
-use crate::core::wallet::Wallet;
+use crate::FireError;
 
-pub fn encrypt_wallet(wallet: &Wallet, password: &str) -> Result<Vec<u8>, String> {
+/// 🔐 Criptografa dados com AES-256-GCM + HMAC-SHA256
+pub fn encrypt(plaintext: &str, password: &str) -> Result<Vec<u8>, FireError> {
     let mut salt = [0u8; 16];
     OsRng.fill_bytes(&mut salt);
 
-    let mut key = Zeroizing::new([0u8; 64]);
-    let argon2 = Argon2::default();
+    let key = derive_key(password, &salt)?;
 
-    argon2
-        .hash_password_into(password.as_bytes(), &salt, key.as_mut_slice())
-        .map_err(|_| "Erro ao derivar chave com Argon2.".to_string())?;
+    let cipher = Aes256Gcm::new_from_slice(&key).map_err(|_| FireError::EncryptionError)?;
 
-    let mut aes_key = Zeroizing::new([0u8; 32]);
-    let mut hmac_key = Zeroizing::new([0u8; 32]);
+    let mut nonce = [0u8; 12];
+    OsRng.fill_bytes(&mut nonce);
+    let nonce_obj = Nonce::from_slice(&nonce);
 
-    aes_key.as_mut_slice().copy_from_slice(&key[..32]);
-    hmac_key.as_mut_slice().copy_from_slice(&key[32..]);
+    let ciphertext = cipher
+        .encrypt(nonce_obj, plaintext.as_bytes())
+        .map_err(|_| FireError::EncryptionError)?;
 
-    let cipher = Aes256Gcm::new(Key::<Aes256Gcm>::from_slice(aes_key.as_slice()));
-    let nonce = Nonce::from_slice(&salt[..12]);
-    let data = wallet.to_encrypted_bytes()?;
+    let mut output = vec![];
+    output.extend_from_slice(&salt);     // 16 bytes
+    output.extend_from_slice(&nonce);    // 12 bytes
+    output.extend_from_slice(&ciphertext);
 
-    let encrypted = cipher
-        .encrypt(nonce, data.as_ref())
-        .map_err(|_| "Erro ao criptografar dados.".to_string())?;
-
-    let mut mac: Hmac<Sha256> = Mac::new_from_slice(hmac_key.as_slice())
-        .map_err(|_| "Erro ao criar HMAC.".to_string())?;
-
-    mac.update(&salt);
-    mac.update(&encrypted);
+    let mut mac = <Hmac<Sha256> as Mac>::new_from_slice(&key).unwrap();
+    mac.update(&output);
     let tag = mac.finalize().into_bytes();
 
-    let mut result = vec![];
-    result.extend_from_slice(&salt);
-    result.extend_from_slice(&tag);
-    result.extend_from_slice(&encrypted);
-    Ok(result)
+    output.extend_from_slice(&tag); // 32 bytes
+
+    Ok(output)
 }
 
-pub fn decrypt_wallet(data: &[u8], password: &str) -> Result<Wallet, String> {
-    if data.len() < 48 {
-        return Err("Dados criptografados estão incompletos.".to_string());
+/// 🔓 Descriptografa dados criptografados com AES-256-GCM + HMAC-SHA256
+pub fn decrypt(encrypted: &[u8], password: &str) -> Result<String, FireError> {
+    if encrypted.len() < 60 {
+        return Err(FireError::DecryptionError);
     }
 
-    let salt = &data[0..16];
-    let tag = &data[16..48];
-    let encrypted = &data[48..];
+    let (salt, rest) = encrypted.split_at(16);
+    let (nonce, rest) = rest.split_at(12);
+    let (ciphertext, tag) = rest.split_at(rest.len() - 32);
 
-    let mut key = Zeroizing::new([0u8; 64]);
+    let key = derive_key(password, salt)?;
+
+    let mut mac = <Hmac<Sha256> as Mac>::new_from_slice(&key).unwrap();
+    mac.update(&encrypted[..encrypted.len() - 32]);
+    mac.verify_slice(tag).map_err(|_| FireError::InvalidPassword)?;
+
+    let cipher = Aes256Gcm::new_from_slice(&key).map_err(|_| FireError::DecryptionError)?;
+    let nonce_obj = Nonce::from_slice(nonce);
+
+    let plaintext = cipher
+        .decrypt(nonce_obj, ciphertext)
+        .map_err(|_| FireError::DecryptionError)?;
+
+    Ok(String::from_utf8(plaintext).map_err(|_| FireError::DecryptionError)?)
+}
+
+/// 🔑 Deriva uma chave de 256 bits via Argon2id
+fn derive_key(password: &str, salt: &[u8]) -> Result<[u8; 32], FireError> {
+    let salt_str = SaltString::encode_b64(salt).map_err(|_| FireError::KeyDerivationError)?;
     let argon2 = Argon2::default();
 
-    argon2
-        .hash_password_into(password.as_bytes(), salt, key.as_mut_slice())
-        .map_err(|_| "Erro ao derivar chave com Argon2.".to_string())?;
+    let hash = argon2
+        .hash_password(password.as_bytes(), &salt_str)
+        .map_err(|_| FireError::KeyDerivationError)?
+        .hash
+        .ok_or(FireError::KeyDerivationError)?;
 
-    let mut aes_key = Zeroizing::new([0u8; 32]);
-    let mut hmac_key = Zeroizing::new([0u8; 32]);
-
-    aes_key.as_mut_slice().copy_from_slice(&key[..32]);
-    hmac_key.as_mut_slice().copy_from_slice(&key[32..]);
-
-    let mut mac: Hmac<Sha256> = Mac::new_from_slice(hmac_key.as_slice())
-        .map_err(|_| "Erro ao criar HMAC.".to_string())?;
-
-    mac.update(salt);
-    mac.update(encrypted);
-    mac.verify_slice(tag)
-        .map_err(|_| "❌ Integridade comprometida: senha incorreta ou dados alterados.".to_string())?;
-
-    let cipher = Aes256Gcm::new(Key::<Aes256Gcm>::from_slice(aes_key.as_slice()));
-    let nonce = Nonce::from_slice(&salt[..12]);
-
-    let decrypted = cipher
-        .decrypt(nonce, encrypted.as_ref())
-        .map_err(|_| "Erro ao descriptografar dados.".to_string())?;
-
-    Wallet::from_decrypted_bytes(&decrypted)
+    let mut key = [0u8; 32];
+    key.copy_from_slice(&hash.as_bytes()[..32]);
+    Ok(key)
 }

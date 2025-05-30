@@ -1,6 +1,6 @@
 [package]
 name = "firechain-cli"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 authors = ["Guilherme Lima"]
 description = "🔥 FireChain CLI - Carteira Web3 com foco em segurança, modularidade e experiência premium."
@@ -50,6 +50,7 @@ hmac = "0.12"
 argon2 = "0.5"
 rand_core = "0.6"
 zeroize = "1.6"
+password-hash = "0.5.0"
 
 # ────────────────────────────────────────────────────────────────
 # 🧪 DEPENDÊNCIAS DE TESTES — Garantia de qualidade e confiabilidade

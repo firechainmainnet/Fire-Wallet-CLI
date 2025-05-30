@@ -1,69 +1,83 @@
-# 📄 Licença de Uso – FireChain CLI
 
+# 📄 Licença de Uso – FireChain CLI (MIT + Condições Adicionais)
 **Projeto:** FireChain CLI  
 **Autor:** Guilherme Lima  
-**Versão da Licença:** 1.1 (2025)  
-**Jurisdicação Primária:** República Federativa do Brasil
+**Versão da Licença:** 1.2 (2025)  
+**Jurisdicação Primária:** República Federativa do Brasil  
+**Foro Competente:** Comarca de Fortaleza – CE  
+**Última Atualização:** 30 de Maio de 2025
 
 ---
 
-## 🔓 Termos da Licença MIT (Original)
+## 🔓 Licença MIT (Texto Original)
 
 MIT License
 
 Copyright (c) 2025 Guilherme Lima
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+> The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
----
-
-## ⚠️ Aviso de Uso Comercial e Institucional
-
-O uso da FireChain CLI em contextos empresariais, com fins lucrativos, produtos comerciais, integrações OEM ou ambientes Web3 monetizados **requer licenciamento comercial separado**, conforme definido em:
-
-🔗 [COMMERCIAL_LICENSE_FIRECHAIN.md](./COMMERCIAL_LICENSE_FIRECHAIN.md)
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
-## 🧠 Resumo Jurídico (Plain Language Clause)
+## ⚠️ Aviso de Uso Comercial
 
-⚠️ Em linguagem simples: você pode usar este projeto livremente para aprender, estudar ou desenvolver.  
-Mas se pretende vender, oferecer como serviço, integrar em produto comercial ou lucrar com ele, você **precisa obter uma licença comercial específica**.
+A FireChain CLI está licenciada sob os termos da **MIT License** para fins educacionais, não comerciais e acadêmicos.
+
+Contudo, qualquer **uso comercial, institucional, lucrativo ou integrado a produtos monetizáveis** requer **licença comercial específica**, sob termos da [COMMERCIAL_LICENSE_FIRECHAIN.md].
+
+Casos típicos que requerem licenciamento adicional:
+
+- Integração com plataformas Web3, SaaS, DEX ou custódia
+- Venda ou oferta da CLI como produto ou serviço
+- Uso institucional em empresas, bancos ou operações de custódia
+- Distribuição como SDK ou CLI de terceiros
+- Integração com hardware físico ou cold wallets
+
+---
+
+## 🧠 Cláusula de Interpretação Simples
+
+> Você pode usar este projeto **livremente** para estudar, aprender, adaptar e experimentar.  
+> Se for usá-lo para **gerar lucro direto ou indireto**, **é necessário contratar uma licença comercial**.  
+> A marca FireChain CLI representa uma infraestrutura sensível — seu uso institucional exige responsabilidade.
 
 ---
 
 ## 🔐 Proteção de Marca e Identidade
 
-A presente licença **não concede** o direito de uso do nome, marca registrada, logotipos ou identidade visual “FireChain™”, salvo mediante contrato separado.  
-A utilização não autorizada desses elementos está sujeita a penalidades previstas em lei.
+Esta licença **não concede** permissão de uso do nome FireChain™, nem de qualquer elemento visual, logotipo, símbolo, domínio ou identidade gráfica associada.
+
+O uso não autorizado desses elementos estará sujeito às sanções legais previstas na Lei de Propriedade Intelectual e no Código Civil Brasileiro.
 
 ---
 
-## ⚖️ Jurisdição e Resolução de Disputas
+## 🤝 NDA, Contratos Técnicos e Sublicenciamento
 
-Este documento é regido pelas leis da **República Federativa do Brasil**.  
-Em caso de disputas, busca-se prioritariamente a **resolução extrajudicial**. Persistindo o conflito, o foro competente será o da **Comarca de São Paulo (SP)**, salvo cláusula contratual em contrário.
+O autor pode, mediante contrato separado, conceder:
 
----
-
-## 🤝 Sublicenciamento, NDA e Contratos Técnicos
-
-Mediante acordo adicional, o autor poderá firmar cláusulas específicas para:
-
-- 📄 NDA (sigilo técnico ou comercial)
-- 🔁 Sublicenciamento restrito
-- 🧑‍💻 Consultoria, auditoria técnica ou suporte personalizado
+- 📄 NDA para acesso antecipado ou sigiloso
+- 🔁 Sublicenciamento sob cláusula técnica controlada
+- 🛠 Suporte profissional, auditoria ou builds dedicados
 
 ---
 
-## 📬 Contato Institucional
+## ⚖️ Jurisdição Legal
 
-Todas as solicitações formais, dúvidas legais ou negociações devem ser direcionadas a:  
-🔗 [Guilherme Lima – LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)
+Esta licença é regida pela legislação da **República Federativa do Brasil**.  
+Em caso de disputa jurídica, fica eleito o foro da **Comarca de Fortaleza – CE**, salvo cláusula contratual distinta.
+
+---
+
+## 📬 Contato Oficial
+
+Solicitações de licenciamento, dúvidas legais ou negociações devem ser direcionadas para:
+
+🔗 [Guilherme Lima – LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)  
+📧 licenciamento@firechain.dev *(em breve)*
 
 ---
 

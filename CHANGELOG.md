@@ -12,6 +12,37 @@ Todos os updates importantes neste projeto serão documentados aqui.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/)
 e segue os princípios de versionamento semântico ([SemVer](https://semver.org/lang/pt-BR/)).
 
+
+## [v0.1.4] — 2025-05-30
+
+### 🔐 Segurança e Conformidade Operacional
+- 🔄 Exportação de carteiras `.wallet` agora inclui **hash SHA-256** para verificação de integridade externa.
+- 🧩 Base integrada para futuras compatibilidades com **custódia institucional**, DEXs e ferramentas air-gapped.
+- ✅ CLI validada para uso em ambientes sem conexão com a internet (air-gapped), sem dependências externas.
+
+### 🧬 Fingerprint Evoluído e Identidade Ampliada
+- 📌 Introduzido campo `wallet_id` derivado da fingerprint, no padrão simbólico `FC-XXXXXX`.
+- 🧠 Fingerprint torna-se a chave primária para rastreamento e automações seguras em pipelines Web3.
+
+### 🖥️ CLI Inteligente e Feedback Humanizado
+- 🎯 Mensagens CLI adaptadas ao contexto da execução (ex: sucesso parcial em derivação).
+- 🔔 Mensagens visuais e emojis melhor alinhadas com semântica de cada comando.
+- 📦 Exibição aprimorada para exportação, recuperação e derivação com validação visual clara.
+
+### 📁 Refatorações Arquiteturais e Técnicas
+- 🧱 Criação de `lib.rs` para orquestração de módulos e integração externa.
+- 🧩 `utils/crypto/aes.rs` isola criptografia simétrica com AES-GCM + HMAC.
+- 📂 Modularização de `format.rs`, `export.rs` e `recover.rs` para maior clareza e reutilização.
+
+### 🧲 Posicionamento Estratégico e Marketing Técnico
+- 📣 README completamente reformulado com nova identidade visual, chamada de impacto e estrutura de badges técnicas.
+- 📦 Badges adicionadas para comunicar: `serde`, `zeroize`, `argon2id`, `password-hash`, `execução 100% local`.
+- 🔗 Link do repositório GitHub incluído no final para acesso direto e credibilidade institucional.
+
+---
+
+🚀 Esta versão consolida a FireChain CLI como infraestrutura real de carteiras Web3, com identidade única por fingerprint, compatibilidade com ambientes auditáveis e segurança de nível enterprise.
+
 ---
 
 ## [v0.1.3] - 2025-05-29

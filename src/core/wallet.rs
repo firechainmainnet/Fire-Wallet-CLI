@@ -1,59 +1,68 @@
-use serde::{Deserialize, Serialize}; // ✅ Serialização da struct Wallet
-use secp256k1::{Secp256k1, SecretKey, PublicKey}; // ✅ Criptografia
+use crate::core::address::{generate_btc_address, generate_eth_address, generate_fire_address};
+use crate::utils::crypto::aes::{encrypt, decrypt}; // ✅ Corrigido
+use crate::FireError;
 use rand::rngs::OsRng;
-use sha2::{Digest, Sha256};
-use ripemd::Ripemd160;
+use secp256k1::{Secp256k1, PublicKey}; // ✅ SecretKey removido pois não está sendo usado diretamente
+use sha2::{Sha256, Digest};
 use hex;
+use serde::{Serialize, Deserialize}; // ✅ Adicionado
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)] // ✅ Necessário para export/recover
 pub struct Wallet {
-    pub private_key: String,
-    pub public_key: String,
     pub fingerprint: String,
+    pub public_key: String,
+    pub private_key: String,
+    pub address_btc: String,
+    pub address_eth: String,
+    pub address_firechain: String,
 }
 
 impl Wallet {
-    /// 🔧 Construtor principal da Wallet FireChain
+    /// 🔧 Cria nova carteira com derivação de endereços
     pub fn new(private_key: String, public_key: String, fingerprint: String) -> Self {
-        Wallet {
-            private_key,
-            public_key,
+        let pubkey_bytes = hex::decode(&public_key).expect("chave pública inválida");
+
+        let address_btc = generate_btc_address(&pubkey_bytes);
+        let address_eth = generate_eth_address(&pubkey_bytes);
+        let address_firechain = generate_fire_address(&pubkey_bytes);
+
+        Self {
             fingerprint,
+            public_key,
+            private_key,
+            address_btc,
+            address_eth,
+            address_firechain,
         }
     }
 
-    /// 🔐 Serializa a carteira para JSON (armazenamento seguro)
-    pub fn to_encrypted_bytes(&self) -> Result<Vec<u8>, String> {
-        let json_data = serde_json::to_vec_pretty(&self)
-            .map_err(|_| "❌ Falha ao serializar a carteira.".to_string())?;
-        Ok(json_data)
-    }
-
-    /// 🔓 Desserializa a carteira a partir de bytes descriptografados
-    pub fn from_decrypted_bytes(decrypted: &[u8]) -> Result<Self, String> {
-        serde_json::from_slice(&decrypted)
-            .map_err(|_| "❌ Falha ao decodificar o conteúdo da wallet.".to_string())
-    }
-
-    /// 🧠 Gera uma identidade criptográfica (PK, PUB, Fingerprint) aleatória
+    /// 🧠 Gera pubkey, privkey e fingerprint
     pub fn generate_wallet_identity() -> (String, String, String) {
         let secp = Secp256k1::new();
-        let mut rng = OsRng;
+        let (secret_key, _public_key) = secp.generate_keypair(&mut OsRng);
 
-        // 🔐 Gera chave privada
-        let private_key = SecretKey::new(&mut rng);
-        let private_key_hex = hex::encode(private_key.secret_bytes());
+        let private_key = hex::encode(secret_key.secret_bytes());
+        let public_key = hex::encode(PublicKey::from_secret_key(&secp, &secret_key).serialize_uncompressed());
 
-        // 📤 Gera chave pública
-        let public_key = PublicKey::from_secret_key(&secp, &private_key);
-        let public_key_bytes = public_key.serialize_uncompressed();
-        let public_key_hex = hex::encode(public_key_bytes);
+        // SHA256(pubkey) → primeiros 6 bytes como fingerprint
+        let mut hasher = Sha256::new();
+        hasher.update(&hex::decode(&public_key).unwrap());
+        let result = hasher.finalize();
+        let fingerprint = hex::encode(&result[..6]).to_uppercase();
 
-        // 🧬 Calcula fingerprint (SHA256 -> RIPEMD160)
-        let sha256 = Sha256::digest(&public_key_bytes);
-        let ripemd160 = Ripemd160::digest(&sha256);
-        let fingerprint_hex = hex::encode(ripemd160);
-
-        (private_key_hex, public_key_hex, fingerprint_hex)
+        (private_key, public_key, fingerprint)
     }
+}
+
+/// 🔐 Criptografa carteira como JSON + AES-GCM
+pub fn encrypt_wallet(wallet: &Wallet, password: &str) -> Result<Vec<u8>, FireError> {
+    let json = serde_json::to_string(wallet)?; // ✅ Requer Serialize
+    encrypt(&json, password)
+}
+
+/// 🔓 Descriptografa e reconstrói a carteira
+pub fn decrypt_wallet(encrypted: &[u8], password: &str) -> Result<Wallet, FireError> {
+    let decrypted = decrypt(encrypted, password)?;
+    let wallet: Wallet = serde_json::from_str(&decrypted)?; // ✅ Requer Deserialize
+    Ok(wallet)
 }

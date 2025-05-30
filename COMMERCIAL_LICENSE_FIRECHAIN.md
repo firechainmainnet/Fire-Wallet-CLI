@@ -1,109 +1,128 @@
-# 📄 Licença Comercial – FireChain CLI
+
+# 📄 Licença Comercial FireChain CLI™ v2.1
 
 **Projeto:** FireChain CLI  
-**Autor:** Guilherme Lima  
-**Versão da Licença:** 2.0 (2025)  
-**Jurisdicação:** República Federativa do Brasil  
-**Documento vinculante com validade legal internacional**
+**Autor e Titular dos Direitos:** Guilherme Lima  
+**Versão da Licença:** 2.1 (2025)  
+**Jurisdicação Legal:** República Federativa do Brasil  
+**Documento com validade jurídica internacional sob regime de Copyright, NDA técnico e normas de engenharia digital**
 
 ---
 
-## 📘 1. Objeto da Licença
+## 📘 1. Objeto e Escopo
 
-Este documento regula a utilização da FireChain CLI em contextos comerciais, institucionais ou monetizados.  
-Ao utilizar a FireChain CLI com qualquer finalidade listada nesta licença, a parte interessada reconhece e aceita os termos aqui estabelecidos.
+Esta licença regulamenta o uso da **FireChain CLI** em ambientes **comerciais, governamentais, financeiros, institucionais ou soberanos**, nos quais operações seguras e verificáveis são mandatórias.
 
-A licença é concedida **exclusivamente mediante autorização formal e/ou contrato escrito** com o autor do projeto.
+Inclui:  
+- Execução como CLI local  
+- Integração como SDK  
+- Geração e recuperação de carteiras  
+- Derivação criptográfica e fingerprinting  
 
----
-
-## ✅ 2. Finalidades Permitidas (mediante aprovação)
-
-O uso comercial da FireChain CLI é autorizado somente após contratação e pode incluir:
-
-- Integração em plataformas **SaaS, Web3, DeFi ou custódia**
-- Distribuição embutida como **SDK, CLI ou biblioteca**
-- Inclusão em **produtos white-label** ou com **branding próprio**
-- Utilização em sistemas de **monitoramento, geração de chaves ou automação de carteiras**
-- Oferecimento como **serviço técnico baseado na CLI**
-- Redistribuição controlada via sublicenciamento (apenas mediante cláusula específica)
+> A FireChain CLI foi concebida como **infraestrutura para soberania digital**, com foco em rastreabilidade, privacidade e integridade operacional.  
+> Seu uso em ambientes críticos exige conformidade e licenciamento formal.
 
 ---
 
-## ⛔ 3. Restrições Comerciais (sem exceções)
+## ✅ 2. Planos de Licenciamento Comercial
 
-É expressamente proibido:
-
-- Vender, sublicenciar ou redistribuir o software **sem contrato assinado**
-- Usar o nome “FireChain™”, logotipos ou identidade visual sem autorização formal
-- Copiar, modificar ou criar projetos derivados com objetivo concorrencial
-- Integrar em dispositivos físicos (hardware wallets, servidores OEM) sem acordo
-- Associar a marca FireChain™ a produtos não aprovados pelo autor
-
----
-
-## 📦 4. Direitos Concedidos (Limitados)
-
-A licença comercial **não transfere** a titularidade do software. O licenciado recebe **direitos restritos e intransferíveis**, válidos apenas enquanto vigente o contrato.
-
-Quaisquer direitos adicionais deverão constar expressamente em cláusula contratual.
+| Plano                      | Valor Sugerido (USD)    | Público-Alvo                                   | Recursos Incluídos                                     |
+|----------------------------|-------------------------|-------------------------------------------------|--------------------------------------------------------|
+| 🔰 Starter                 | $149 / anual            | Dev solo, freelancers                          | Uso comercial local, 1 projeto, 1 exportação           |
+| 🛡️ Custódia Segura         | $990 / anual            | Plataformas DeFi, carteiras privadas           | SDK + SLA + builds verificados                         |
+| 🔐 Infraestrutura Enterprise | $4.800 / anual          | Exchanges, custodians Web3                     | Multi-instância + suporte assinado + NDA técnico       |
+| 🧱 Defesa Soberana         | > $20.000 / sob consulta| Governos, Exércitos, bancos tokenizados        | Build blindado + suporte exclusivo + canal sigiloso    |
 
 ---
 
-## 🧠 5. Propriedade Intelectual
+## 🔒 3. Direitos Concedidos
 
-A FireChain CLI, sua arquitetura, nomenclatura, logotipo, código-fonte original e documentação são de **propriedade exclusiva** de Guilherme Lima.  
-Nada nesta licença implica cessão definitiva de direitos autorais, marcas ou patentes.
+Mediante contratação e aceite formal, são concedidos:
 
----
+- Direitos operacionais limitados e não exclusivos
+- Uso em sistemas CI/CD, pipelines ou infraestrutura local
+- Redistribuição controlada como SDK (planos superiores)
+- Auditoria técnica com assinatura digital sob contrato
 
-## 🕓 6. Vigência e Revogação
-
-A licença comercial é válida pelo período especificado em contrato individual e pode ser:
-
-- Revogada em caso de violação dos termos aqui previstos
-- Não renovada automaticamente sem manifestação de ambas as partes
-
-A revogação por violação implica obrigação imediata de cessar uso, distribuição ou integração.
+> **O uso não transfere a titularidade.**  
+> O código-fonte, arquitetura e marcas permanecem exclusivos do autor.
 
 ---
 
-## ⚖️ 7. Jurisdição e Disputas
+## ⛔ 4. Restrições
 
-Este contrato é regido pela legislação da **República Federativa do Brasil**.  
-Conflitos serão preferencialmente solucionados por vias extrajudiciais. Persistindo, fica eleito o foro da **Comarca de São Paulo – SP**, salvo acordo mais específico.
-
----
-
-## 🤫 8. Confidencialidade e NDA
-
-Toda negociação, versão personalizada ou adaptação técnica será tratada como **informação confidencial**.  
-O licenciado compromete-se a não divulgar aspectos não públicos da tecnologia ou dos termos comerciais, exceto mediante permissão.
+- Proibida a revenda, sublicenciamento ou redistribuição sem cláusula expressa
+- Proibido uso da marca FireChain™, logotipo ou identidade visual sem contrato
+- Proibida derivação de projetos concorrentes ou integração a hardware externo
 
 ---
 
-## 🔁 9. Sublicenciamento e Terceiros
+## 📦 5. SLA e Suporte Técnico
 
-Sublicenciamento só é permitido se **expressamente autorizado** por cláusula contratual.  
-A transferência da licença a terceiros, filiais ou afiliadas requer **aprovação escrita do autor**.
+Para planos Custódia, Enterprise e Soberano:
 
----
-
-## 📩 10. Contato e Protocolo
-
-Para solicitar licenciamento comercial:
-
-- 📬 [Guilherme Lima – LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)
-- 📩 Licenças são avaliadas conforme escopo de uso, impacto e volume projetado
+- SLA técnico de resposta até 48h úteis
+- Canal seguro de notificações críticas
+- Builds assíncronos assinados
+- Atualizações por changelog autenticado
 
 ---
 
-## ✅ 11. Aceitação Legal
+## 📜 6. NDA e Confidencialidade
 
-Este documento tem força vinculante e pode ser usado como base contratual, especialmente quando referenciado em cláusulas de uso público ou termos adicionais.
-
-O uso comercial da FireChain CLI **sem autorização expressa constitui violação de direitos autorais e poderá ser judicialmente cobrado**.
+Qualquer comunicação técnica, adaptação ou estrutura de build é protegida por **Acordo de Confidencialidade (NDA)**.  
+Qualquer quebra implica revogação imediata da licença e responsabilidade civil associada.
 
 ---
 
-**Todos os direitos reservados. FireChain CLI © Guilherme Lima 2025.**
+## ⚖️ 7. Jurisdição Legal
+
+- Regido pela legislação da República Federativa do Brasil
+- Foro eleito: **Comarca de Fortaleza – CE**
+- Aplicação de mediação ou arbitragem sob cláusula contratual específica
+
+---
+
+## 📐 8. Conformidade Técnica e Normas Seguidas
+
+A FireChain CLI adere aos seguintes princípios e normas técnicas:
+
+- 🛡️ OWASP Secure Coding Principles
+- 🔐 AES-256-GCM + HMAC como padrão de criptografia simétrica
+- 📦 Hashes por SHA-2, RIPEMD160 e Keccak (compatível com BIP-340)
+- ✅ Arquitetura local-first, conforme recomendações da NIST SP 800-63
+- 🔍 Zero Trust CLI: sem dependência externa, REST ou conexão de rede
+- 🔬 Auditoria de memória com `zeroize` e fingerprinting verificável
+- 🧪 Testes automatizados com 100% de cobertura (`cargo llvm-cov`)
+
+### 📊 Comparativo Institucional
+
+| Critério                          | FireChain CLI             | Soluções Comuns de Mercado        |
+|----------------------------------|----------------------------|-----------------------------------|
+| Execução Local                   | 100% local, offline        | REST, online, dependente de APIs  |
+| Criptografia Aplicada            | AES-GCM + HMAC             | AES simples ou WebStorage         |
+| Fingerprint com ID único         | Sim (FC-XXXX)              | Parcial ou inexistente            |
+| Exportação `.wallet` auditável   | Sim, com hash SHA-256      | Frequentemente injetada via front |
+| Licença Comercial com NDA        | Formal e escrita           | Ausente ou implícita              |
+| Modularidade e CLI-first         | CLI real com UX premium    | GUI, bibliotecas genéricas        |
+
+> Projetada para operar onde o erro **não pode acontecer** — a FireChain CLI prioriza rastreabilidade, modularidade e privacidade local como pilar estratégico.
+
+---
+
+## 📩 9. Contato e Solicitação
+
+Solicite avaliação de licenciamento:
+
+🔗 [Guilherme Lima – LinkedIn](https://www.linkedin.com/in/guilhermelimadev-web3/)  
+
+---
+
+## ✅ 10. Cláusula de Aceitação
+
+O uso da FireChain CLI para qualquer finalidade monetizada, institucional ou redistributiva **sem licenciamento expresso** constitui violação de propriedade intelectual, sujeita a responsabilização jurídica.
+
+---
+
+© Guilherme Lima – Todos os direitos reservados.  
+**FireChain CLI™ — Execução local. Soberania digital. Criptografia de guerra.**
