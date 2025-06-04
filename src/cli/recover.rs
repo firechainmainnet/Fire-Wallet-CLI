@@ -1,5 +1,5 @@
 use crate::core::wallet::Wallet;
-use crate::utils::crypto::aes::encrypt_wallet;
+use crate::core::wallet::encrypt_wallet;
 use crate::FireError;
 
 use std::fs;
